@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchText;
     private FloatingActionButton addFolderBtn;
     private ActivityResultLauncher<Intent> rsLauncherForAdd;
+    private ActivityResultLauncher<Intent> rsLaucherForUpdate;
+    private int pos;
+    private TextWatcher textWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +48,17 @@ public class MainActivity extends AppCompatActivity {
         this.searchText = findViewById(R.id.searchText);
         this.addFolderBtn = findViewById(R.id.addFolderButton);
 
-        this.folderAdapter = new FolderAdapter(this,this.listFolder);
+        this.folderAdapter = new FolderAdapter(this, this.listFolder, new FolderAdapter.ClickListeners() {
+            @Override
+            public void onItemLongClick(int position, View v) {
+                pos = position;
+                Folder f = listFolder.get(pos);
+                Intent i = new Intent(MainActivity.this,AddFolderActivity.class);
+                i.putExtra("flag","update");
+                i.putExtra("folderE",f);
+                rsLaucherForUpdate.launch(i);
+            }
+        });
         this.rcView = findViewById(R.id.recycleFolder);
         this.rcView.setAdapter(this.folderAdapter);
         this.rcView.addItemDecoration(new DividerItemDecoration(this.rcView.getContext(), DividerItemDecoration.VERTICAL));
@@ -53,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("flag","add");
             this.rsLauncherForAdd.launch(i);
         });
+        this.searchText.addTextChangedListener(this.initTextWatcher());
 }
     public void getAllMovie(){
         try {
@@ -79,11 +96,43 @@ public class MainActivity extends AppCompatActivity {
                     this.folderAdapter.notifyDataSetChanged();
                 }
             });
+            this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
+                if(rs != null && rs.getResultCode() == RESULT_OK){
+                    Folder fAE = (Folder) rs.getData().getSerializableExtra("fE");
+                    this.listFolder.set(this.pos,fAE);
+                    this.folderAdapter.notifyItemChanged(this.pos);
+                }
+            });
         }
         catch(Exception ex){
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());
             alert.show();
         }
+    }
+    public TextWatcher initTextWatcher(){
+        this.textWatcher = new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                for (int i = 0; i < listFolder.size(); i++) {
+                    if (listFolder.get(i).getName().equals(searchText.getText().toString())) {
+                        ArrayList<Folder> newListFolder = new ArrayList<Folder>();
+                        newListFolder.add(listFolder.get(i));
+                        listFolder = newListFolder;
+                        folderAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            private boolean filterLongEnough() {
+                return searchText.getText().toString().trim().length() > 2;
+            }
+        };
+        return this.textWatcher;
     }
 }

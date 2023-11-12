@@ -15,20 +15,30 @@ import com.example.noteapp.Model.Folder;
 import com.example.noteapp.R;
 
 import java.util.ArrayList;
-public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderViewHolder>{
+public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderViewHolder> {
     private Context fContext;
     private ArrayList<Folder> listFolder;
+    private ClickListeners clickListeners;
 
-    public FolderAdapter(Context fContext, ArrayList<Folder> listFolder) {
+    public FolderAdapter(Context fContext, ArrayList<Folder> listFolder,ClickListeners clickListeners) {
         this.fContext = fContext;
         this.listFolder = listFolder;
+        this.clickListeners = clickListeners;
     }
 
-    public class FolderViewHolder extends RecyclerView.ViewHolder{
+    public class FolderViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         TextView name;
         public FolderViewHolder(@NonNull View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.nameFolder);
+
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListeners.onItemLongClick(getAdapterPosition(),v);
+            return true;
         }
     }
     //3 phuong thuc quan trong cua adapter
@@ -51,5 +61,9 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderView
             return this.listFolder.size();
         else
             return 0;
+    }
+    public interface ClickListeners{
+//        void onItemClick(int position, View v);
+        void onItemLongClick(int position, View v);
     }
 }

@@ -38,6 +38,11 @@ public class AddFolderActivity extends AppCompatActivity {
         this.flag = i.getStringExtra("flag");
         if(this.flag.equals("update")) {
             //To do update...
+            this.headerText.setText("Cập nhật thư mục");
+            this.editFolderBtn.setText("Lưu lại");
+
+            Folder folderE = (Folder) i.getSerializableExtra("folderE");
+            this.nameFolderText.setText(folderE.getName());
         }else {
             this.headerText.setText("Tạo mới thư mục");
             this.editFolderBtn.setText("Tạo mới");
@@ -61,7 +66,19 @@ public class AddFolderActivity extends AppCompatActivity {
                         alert.show();
                     }
                 }else{
-                    // To do if update...
+                    // To do update...
+                    try{
+                        Folder fE = new Folder(1,nameFolderText.getText().toString(),"active");
+                        Intent i = new Intent();
+                        i.putExtra("fE",fE);
+                        setResult(RESULT_OK,i);
+                        finish();
+                    }
+                    catch(Exception ex){
+                        AlertDialog.Builder alert = new AlertDialog.Builder(AddFolderActivity.this);
+                        alert.setMessage(ex.getMessage());
+                        alert.show();
+                    }
                 }
             }
         });
