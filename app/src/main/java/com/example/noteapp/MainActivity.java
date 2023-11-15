@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton addFolderBtn;
     private ActivityResultLauncher<Intent> rsLauncherForAdd;
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
+    private ActivityResultLauncher<Intent> rsLaucherForNote;
     private int pos;
     private TextWatcher textWatcher;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.getAllMovie();
+        this.getAllFolder();
         this.initResultLauncher();
 
         this.textFolder = findViewById(R.id.TextFolder);
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
                 i.putExtra("folderE",f);
                 rsLaucherForUpdate.launch(i);
             }
+            @Override
+            public void onItemClick(int position ,View v){
+                pos = position;
+                Folder fol = listFolder.get(pos);
+                Intent i = new Intent(MainActivity.this,NoteListActivity.class);
+                i.putExtra("idFolder",fol.getId());
+                rsLaucherForNote.launch(i);
+            }
         });
         this.rcView = findViewById(R.id.recycleFolder);
         this.rcView.setAdapter(this.folderAdapter);
@@ -71,14 +80,15 @@ public class MainActivity extends AppCompatActivity {
         });
         this.searchText.addTextChangedListener(this.initTextWatcher());
 }
-    public void getAllMovie(){
+    public void getAllFolder(){
         try {
+            //Lay ra tat ca cac folder tu db
             this.listFolder= new ArrayList<Folder>();
             Folder f1 = new Folder(1,"Folder1","active");
             this.listFolder.add(f1);
-            Folder f2 = new Folder(1,"Folder2","active");
+            Folder f2 = new Folder(2,"Folder2","active");
             this.listFolder.add(f2);
-            Folder f3 = new Folder(1,"Folder3","active");
+            Folder f3 = new Folder(3,"Folder3","active");
             this.listFolder.add(f3);
         }
         catch (Exception ex){
@@ -102,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                     this.listFolder.set(this.pos,fAE);
                     this.folderAdapter.notifyItemChanged(this.pos);
                 }
+            });
+            this.rsLaucherForNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
             });
         }
         catch(Exception ex){

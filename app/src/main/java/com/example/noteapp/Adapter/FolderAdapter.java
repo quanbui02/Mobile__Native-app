@@ -26,19 +26,24 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderView
         this.clickListeners = clickListeners;
     }
 
-    public class FolderViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
+    public class FolderViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
         TextView name;
         public FolderViewHolder(@NonNull View itemView){
             super(itemView);
             name = itemView.findViewById(R.id.nameFolder);
 
             itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public boolean onLongClick(View v) {
             clickListeners.onItemLongClick(getAdapterPosition(),v);
             return true;
+        }
+        @Override
+        public void onClick(View v) {
+            clickListeners.onItemClick(getAdapterPosition(),v);
         }
     }
     //3 phuong thuc quan trong cua adapter
@@ -63,7 +68,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderView
             return 0;
     }
     public interface ClickListeners{
-//        void onItemClick(int position, View v);
+        void onItemClick(int position, View v);
         void onItemLongClick(int position, View v);
     }
 }
