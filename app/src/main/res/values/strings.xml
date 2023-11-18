@@ -45,4 +45,5 @@
     </string>
     <string name="title_activity_note_list">NoteListActivity</string>
     <string name="title_activity_add_folder">AddFolderActivity</string>
+    <string name="title_activity_add_note">AddNoteActivity</string>
 </resources>

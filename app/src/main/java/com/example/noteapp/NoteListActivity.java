@@ -7,6 +7,8 @@ import com.example.noteapp.Adapter.NoteAdapter;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,11 +31,13 @@ public class NoteListActivity extends AppCompatActivity {
     private RecyclerView rcNoteView;
     private NoteAdapter noteAdapter;
     private ArrayList<Note> listNote;
+    private ActivityResultLauncher<Intent> rsLaucherForAdd;
     private int idFolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_list);
+        this.initRsLauncher();
 
         Intent i = getIntent();
         try {
@@ -64,6 +68,15 @@ public class NoteListActivity extends AppCompatActivity {
                 finish();
             }
         });
+        this.addNoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(NoteListActivity.this,AddNoteActivity.class);
+                i.putExtra("flag","add_note");
+                i.putExtra("idFolderAdd",idFolder);
+                rsLaucherForAdd.launch(i);
+            }
+        });
 
     }
     public void getAllNote(int id){
@@ -90,5 +103,8 @@ public class NoteListActivity extends AppCompatActivity {
             }
         }
     }
-
+    public void initRsLauncher(){
+        this.rsLaucherForAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
+        });
+    }
 }

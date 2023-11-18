@@ -52,6 +52,6 @@
         android:layout_marginEnd="57dp"
         android:ems="10"
         android:inputType="text"
-        android:text="            Tìm kiếm  thư mục" />
+        android:hint="Tìm kiếm thư mục" />
 
 </RelativeLayout>
