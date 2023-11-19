@@ -22,7 +22,7 @@ public class AddFolderActivity extends AppCompatActivity {
     private Button editFolderBtn;
     private Button backButton;
     private String flag;
-
+    private Folder fE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,13 @@ public class AddFolderActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         this.flag = i.getStringExtra("flag");
+        this.fE = (Folder) i.getSerializableExtra("folderE");
         if(this.flag.equals("update")) {
             //To do update...
             this.headerText.setText("Cập nhật thư mục");
             this.editFolderBtn.setText("Lưu lại");
 
-            Folder folderE = (Folder) i.getSerializableExtra("folderE");
-            this.nameFolderText.setText(folderE.getName());
+            this.nameFolderText.setText(this.fE.getName());
         }else {
             this.headerText.setText("Tạo mới thư mục");
             this.editFolderBtn.setText("Tạo mới");
@@ -54,7 +54,7 @@ public class AddFolderActivity extends AppCompatActivity {
                 if(flag.equals("add")) {
                     try {
                         Folder f = new Folder(1,nameFolderText.getText().toString(),"active");
-
+                        //call addFolderToDatabase() and get id from function then set newID for folder
                         Intent i = new Intent();
                         i.putExtra("folder",f);
                         setResult(RESULT_OK,i);
@@ -68,9 +68,10 @@ public class AddFolderActivity extends AppCompatActivity {
                 }else{
                     // To do update...
                     try{
-                        Folder fE = new Folder(1,nameFolderText.getText().toString(),"active");
+                        Folder fAE = new Folder(fE.getId(),nameFolderText.getText().toString(),"active");
+                        //call updateFolderDatabase
                         Intent i = new Intent();
-                        i.putExtra("fE",fE);
+                        i.putExtra("fAE",fAE);
                         setResult(RESULT_OK,i);
                         finish();
                     }

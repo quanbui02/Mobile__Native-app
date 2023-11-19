@@ -60,7 +60,7 @@
         android:layout_below="@+id/noteContentText"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="27dp"
+        android:layout_marginEnd="25dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageButton

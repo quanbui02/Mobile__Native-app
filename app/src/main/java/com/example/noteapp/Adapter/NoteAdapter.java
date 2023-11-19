@@ -20,13 +20,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     private Context context;
 
     private ArrayList<Note> listNote;
+    private ClickListeners clickListeners;
 
-    public NoteAdapter(Context context, ArrayList<Note> listNote) {
+    public NoteAdapter(Context context, ArrayList<Note> listNote,ClickListeners cl) {
         this.context = context;
         this.listNote = listNote;
+        this.clickListeners = cl;
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder{
+    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView titleNoteText,dateNoteText;
         ImageView imageViewNote;
         public NoteViewHolder(@NonNull View itemView){
@@ -34,6 +36,12 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             titleNoteText = itemView.findViewById(R.id.titleNoteText);
             dateNoteText = itemView.findViewById(R.id.dateNoteText);
             imageViewNote = itemView.findViewById(R.id.imageViewNote);
+
+            itemView.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v) {
+            clickListeners.onItemClick(getAdapterPosition(),v);
         }
     }
     @NonNull
@@ -56,5 +64,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             return this.listNote.size();
         else
             return 0;
+    }
+    public interface ClickListeners{
+        void onItemClick(int position, View v);
     }
 }

@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             });
             this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
                 if(rs != null && rs.getResultCode() == RESULT_OK){
-                    Folder fAE = (Folder) rs.getData().getSerializableExtra("fE");
+                    Folder fAE = (Folder) rs.getData().getSerializableExtra("fAE");
                     this.listFolder.set(this.pos,fAE);
                     this.folderAdapter.notifyItemChanged(this.pos);
                 }

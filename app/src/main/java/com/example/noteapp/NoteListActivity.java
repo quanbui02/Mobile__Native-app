@@ -1,5 +1,6 @@
 package com.example.noteapp;
 
+import android.app.InvalidForegroundServiceTypeException;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,7 +33,9 @@ public class NoteListActivity extends AppCompatActivity {
     private NoteAdapter noteAdapter;
     private ArrayList<Note> listNote;
     private ActivityResultLauncher<Intent> rsLaucherForAdd;
+    private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private int idFolder;
+    private int pos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +59,17 @@ public class NoteListActivity extends AppCompatActivity {
         this.backNoteBtn = findViewById(R.id.backNoteBtn);
         this.addNoteBtn = findViewById(R.id.addNoteBtn);
 
-        this.noteAdapter = new NoteAdapter(this,this.listNote);
+        this.noteAdapter = new NoteAdapter(this, this.listNote, new NoteAdapter.ClickListeners() {
+            @Override
+            public void onItemClick(int position, View v) {
+                pos = position;
+                Note note = listNote.get(pos);
+                Intent i = new Intent(NoteListActivity.this,AddNoteActivity.class);
+                i.putExtra("flag","edit_note");
+                i .putExtra("noteE",note);
+                rsLaucherForUpdate.launch(i);
+            }
+        });
         this.rcNoteView = findViewById(R.id.recycleNote);
         this.rcNoteView.setAdapter(this.noteAdapter);
         this.rcNoteView.addItemDecoration(new DividerItemDecoration(this.rcNoteView.getContext(), DividerItemDecoration.VERTICAL));
@@ -104,7 +117,26 @@ public class NoteListActivity extends AppCompatActivity {
         }
     }
     public void initRsLauncher(){
-        this.rsLaucherForAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-        });
+        try{
+            this.rsLaucherForAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
+                if(rs != null && rs.getResultCode() == RESULT_OK){
+                    Note n = (Note) rs.getData().getSerializableExtra("new_note");
+                    this.listNote.add(n);
+                    this.noteAdapter.notifyDataSetChanged();
+                }
+            });
+            this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
+                if(rs  != null && rs.getResultCode() == RESULT_OK){
+                    Note nAE = (Note) rs.getData().getSerializableExtra("noteAE");
+                    this.listNote.set(this.pos,nAE);
+                    this.noteAdapter.notifyItemChanged(this.pos);
+                }
+            });
+        }
+        catch(Exception ex){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setMessage(ex.getMessage());
+            alert.show();
+        }
     }
 }
