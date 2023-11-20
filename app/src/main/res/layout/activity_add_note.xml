@@ -46,12 +46,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/noteTitleText"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="Nhập ghi chú tại đây..."
-        android:minHeight="150dp"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:minHeight="150dp" />
 
     <ImageView
         android:id="@+id/imageNoteView"
@@ -59,17 +59,18 @@
         android:layout_height="292dp"
         android:layout_below="@+id/noteContentText"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="30dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageButton
         android:id="@+id/addImageBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="39dp"
         android:layout_below="@+id/imageNoteView"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="175dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="185dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
+
 </RelativeLayout>

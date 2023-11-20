@@ -28,7 +28,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         this.clickListeners = cl;
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
         TextView titleNoteText,dateNoteText;
         ImageView imageViewNote;
         public NoteViewHolder(@NonNull View itemView){
@@ -38,11 +38,18 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             imageViewNote = itemView.findViewById(R.id.imageViewNote);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
         @Override
         public void onClick(View v) {
             clickListeners.onItemClick(getAdapterPosition(),v);
         }
+        @Override
+        public boolean onLongClick(View v) {
+            clickListeners.onItemLongClick(getAdapterPosition(),v);
+            return true;
+        }
+
     }
     @NonNull
     @Override
@@ -67,5 +74,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     }
     public interface ClickListeners{
         void onItemClick(int position, View v);
+        void onItemLongClick(int position,View v);
     }
 }

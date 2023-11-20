@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.noteapp.Adapter.NoteAdapter;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -36,6 +38,7 @@ public class NoteListActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private int idFolder;
     private int pos;
+    private RelativeLayout main_content;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class NoteListActivity extends AppCompatActivity {
         this.searchNoteText = findViewById(R.id.searchNoteText);
         this.backNoteBtn = findViewById(R.id.backNoteBtn);
         this.addNoteBtn = findViewById(R.id.addNoteBtn);
+        this.main_content = findViewById(R.id.note_list_content);
 
         this.noteAdapter = new NoteAdapter(this, this.listNote, new NoteAdapter.ClickListeners() {
             @Override
@@ -68,6 +72,19 @@ public class NoteListActivity extends AppCompatActivity {
                 i.putExtra("flag","edit_note");
                 i .putExtra("noteE",note);
                 rsLaucherForUpdate.launch(i);
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                Snackbar mySnackbar = Snackbar.make(main_content, "Bạn có muốn xoá ghi chú này ?", Snackbar.LENGTH_SHORT);
+                mySnackbar.setAction("Đồng ý", view-> {
+                    pos = position;
+                    Note note = listNote.get(pos);
+                    //Call deleteNote(id)
+                    listNote.remove(pos);
+                    noteAdapter.notifyItemRemoved(pos);
+                });
+                mySnackbar.show();
             }
         });
         this.rcNoteView = findViewById(R.id.recycleNote);
