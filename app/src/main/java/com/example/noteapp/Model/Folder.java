@@ -7,6 +7,9 @@ public class Folder implements Serializable {
     private String name;
     private String statusG;
 
+    public Folder(){
+
+    }
     public Folder(int id, String name, String statusG) {
         this.id = id;
         this.name = name;

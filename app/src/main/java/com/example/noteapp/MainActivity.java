@@ -1,9 +1,11 @@
 package com.example.noteapp;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.example.noteapp.Adapter.FolderAdapter;
+import com.example.noteapp.Database.DatabaseForApp;
 import com.example.noteapp.Model.Folder;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -40,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForNote;
     private int pos;
     private RelativeLayout folder_content;
+    private DatabaseForApp db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.db = new DatabaseForApp(this);
         this.getAllFolder();
         this.initResultLauncher();
 
@@ -91,14 +95,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void getAllFolder() {
         try {
-            //Lay ra tat ca cac folder tu db
+//            //Lay ra tat ca cac folder tu db
             this.listFolder = new ArrayList<Folder>();
-            Folder f1 = new Folder(1, "Folder1", "active");
-            this.listFolder.add(f1);
-            Folder f2 = new Folder(2, "Folder2", "active");
-            this.listFolder.add(f2);
-            Folder f3 = new Folder(3, "Folder3", "active");
-            this.listFolder.add(f3);
+//            Folder f1 = new Folder(1, "Folder1", "active");
+//            this.listFolder.add(f1);
+//            Folder f2 = new Folder(2, "Folder2", "active");
+//            this.listFolder.add(f2);
+//            Folder f3 = new Folder(3, "Folder3", "active");
+//            this.listFolder.add(f3);
+            this.listFolder = this.db.getAllFolder();
         } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());

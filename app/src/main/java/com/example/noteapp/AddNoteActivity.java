@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.example.noteapp.Database.DatabaseForApp;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -45,10 +46,12 @@ public class AddNoteActivity extends AppCompatActivity {
     private Note nE;
     private String  check;
     private ActivityResultLauncher<String> rsAddImage;
+    private DatabaseForApp db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+        this.db = new DatabaseForApp(this);
         check = "false";
         this.initRS();
 
@@ -96,19 +99,28 @@ public class AddNoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(flag.equals("add_note")){
-                    String title = titleNoteText.getText().toString();
-                    String content = contentNoteText.getText().toString();
-                    String createTime = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
+                    try {
+                        String title = titleNoteText.getText().toString();
+                        String content = contentNoteText.getText().toString();
+                        String createTime = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
 
-                    Note note = new Note(1,title,content,createTime,"active","",idFolder);
-                    if(check.equals("true")){
-                        note.setImagePath(imagePath);;
+                        Note note = new Note(1, title, content, createTime, "active", "", idFolder);
+                        if (check.equals("true")) {
+                            note.setImagePath(imagePath);
+                        }
+                        //call addNote() and get id from function then set newID for note
+                        long newIDN = db.addNote(note);
+                        note.setId((int) newIDN);
+                        Intent i = new Intent();
+                        i.putExtra("new_note", note);
+                        setResult(RESULT_OK, i);
+                        finish();
                     }
-                    //call addNoteToDatabase() and get id from function then set newID for note
-                    Intent i = new Intent();
-                    i.putExtra("new_note",note);
-                    setResult(RESULT_OK,i);
-                    finish();
+                    catch (Exception ex){
+                        AlertDialog.Builder alert = new AlertDialog.Builder(AddNoteActivity.this);
+                        alert.setMessage(ex.getMessage());
+                        alert.show();
+                    }
                 }else{
                     //To do update....
                     String title = titleNoteText.getText().toString();
@@ -119,6 +131,7 @@ public class AddNoteActivity extends AppCompatActivity {
                         newNote.setImagePath(imagePath);
                     }
                     // call updateNoteDatabase
+                    db.updateNote(newNote);
                     Intent i = new Intent();
                     i.putExtra("noteAE",newNote);
                     setResult(RESULT_OK,i);

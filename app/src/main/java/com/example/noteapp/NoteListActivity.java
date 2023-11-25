@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.noteapp.Adapter.NoteAdapter;
+import com.example.noteapp.Database.DatabaseForApp;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,10 +40,12 @@ public class NoteListActivity extends AppCompatActivity {
     private int idFolder;
     private int pos;
     private RelativeLayout main_content;
+    private DatabaseForApp db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_list);
+        this.db = new DatabaseForApp(this);
         this.initRsLauncher();
 
         Intent i = getIntent();
@@ -80,7 +83,9 @@ public class NoteListActivity extends AppCompatActivity {
                 mySnackbar.setAction("Đồng ý", view-> {
                     pos = position;
                     Note note = listNote.get(pos);
-                    //Call deleteNote(id)
+                    //Call updateNote(id) to delete
+                    note.setStatusN("not active");
+                    db.updateNote(note);
                     listNote.remove(pos);
                     noteAdapter.notifyItemRemoved(pos);
                 });
@@ -114,19 +119,20 @@ public class NoteListActivity extends AppCompatActivity {
 
         //Lay ve tat ca ca note trong db
         ArrayList<Note> allNote = new ArrayList<Note>();
-        Note n1 = new Note(1,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",1);
-        Note n2 = new Note(2,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
-        Note n3 = new Note(3,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
-        Note n4 = new Note(4,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-        Note n5 = new Note(5,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-        Note n6 = new Note(6,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-        allNote.add(n1);
-        allNote.add(n2);
-        allNote.add(n3);
-        allNote.add(n4);
-        allNote.add(n5);
-        allNote.add(n6);
+//        Note n1 = new Note(1,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",1);
+//        Note n2 = new Note(2,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
+//        Note n3 = new Note(3,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
+//        Note n4 = new Note(4,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
+//        Note n5 = new Note(5,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
+//        Note n6 = new Note(6,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
+//        allNote.add(n1);
+//        allNote.add(n2);
+//        allNote.add(n3);
+//        allNote.add(n4);
+//        allNote.add(n5);
+//        allNote.add(n6);
         //lay ra cac note co idFolder phu hop
+        allNote = this.db.getAllNote();
         for(int i=0;i<allNote.size();i++){
             if(allNote.get(i).getIdFolder() == id){
                 this.listNote.add(allNote.get(i));

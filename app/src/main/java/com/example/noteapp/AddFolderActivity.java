@@ -3,6 +3,7 @@ package com.example.noteapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.noteapp.Database.DatabaseForApp;
 import com.example.noteapp.Model.Folder;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -23,11 +24,13 @@ public class AddFolderActivity extends AppCompatActivity {
     private Button backButton;
     private String flag;
     private Folder fE;
+    private DatabaseForApp db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_folder);
+        this.db = new DatabaseForApp(this);
 
         this.headerText = findViewById(R.id.headerAddFolder);
         this.nameFolderText = findViewById(R.id.editNameFolder);
@@ -54,7 +57,9 @@ public class AddFolderActivity extends AppCompatActivity {
                 if(flag.equals("add")) {
                     try {
                         Folder f = new Folder(1,nameFolderText.getText().toString(),"active");
-                        //call addFolderToDatabase() and get id from function then set newID for folder
+                        //call addFolder() and get id from function then set newID for folder
+                        long newIDF = db.addFolder(f);
+                        f.setId((int) newIDF);
                         Intent i = new Intent();
                         i.putExtra("folder",f);
                         setResult(RESULT_OK,i);
@@ -70,6 +75,7 @@ public class AddFolderActivity extends AppCompatActivity {
                     try{
                         Folder fAE = new Folder(fE.getId(),nameFolderText.getText().toString(),"active");
                         //call updateFolderDatabase
+                        db.updateFolder(fAE);
                         Intent i = new Intent();
                         i.putExtra("fAE",fAE);
                         setResult(RESULT_OK,i);
