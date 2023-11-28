@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/note_list_content"
+    android:id="@+id/note_list_delete_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".NoteListActivity">
+    tools:context=".DeleteNoteListActivity">
 
     <Button
         android:id="@+id/backNoteDeleteBtn"
@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="154dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="136dp"
         android:fontFamily="sans-serif-black"
-        android:text="Ghi chú"
+        android:text="Thùng rác"
         android:textSize="30dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,28 +48,6 @@
         android:ems="10"
         android:inputType="text"
         android:hint="Tìm kiếm ghi chú" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addNoteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="324dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/deleteNoteListBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="38dp"
-        android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
 
 
 </RelativeLayout>

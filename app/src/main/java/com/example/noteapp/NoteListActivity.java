@@ -1,6 +1,5 @@
 package com.example.noteapp;
 
-import android.app.InvalidForegroundServiceTypeException;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -35,8 +34,10 @@ public class NoteListActivity extends AppCompatActivity {
     private RecyclerView rcNoteView;
     private NoteAdapter noteAdapter;
     private ArrayList<Note> listNote;
+    private FloatingActionButton garbageNoteBtn;
     private ActivityResultLauncher<Intent> rsLaucherForAdd;
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
+    private ActivityResultLauncher<Intent> rsLaucherForGarbageNote;
     private int idFolder;
     private int pos;
     private RelativeLayout main_content;
@@ -60,10 +61,11 @@ public class NoteListActivity extends AppCompatActivity {
         }
 
 
-        this.headerNoteText = findViewById(R.id.headerNoteText);
-        this.searchNoteText = findViewById(R.id.searchNoteText);
-        this.backNoteBtn = findViewById(R.id.backNoteBtn);
+        this.headerNoteText = findViewById(R.id.headerNoteDeleteText);
+        this.searchNoteText = findViewById(R.id.searchNoteDeleteText);
+        this.backNoteBtn = findViewById(R.id.backNoteDeleteBtn);
         this.addNoteBtn = findViewById(R.id.addNoteBtn);
+        this.garbageNoteBtn = findViewById(R.id.deleteNoteListBtn);
         this.main_content = findViewById(R.id.note_list_content);
 
         this.noteAdapter = new NoteAdapter(this, this.listNote, new NoteAdapter.ClickListeners() {
@@ -92,7 +94,7 @@ public class NoteListActivity extends AppCompatActivity {
                 mySnackbar.show();
             }
         });
-        this.rcNoteView = findViewById(R.id.recycleNote);
+        this.rcNoteView = findViewById(R.id.recycleNoteDelete);
         this.rcNoteView.setAdapter(this.noteAdapter);
         this.rcNoteView.addItemDecoration(new DividerItemDecoration(this.rcNoteView.getContext(), DividerItemDecoration.VERTICAL));
         this.rcNoteView.setLayoutManager(new LinearLayoutManager(this));
@@ -113,6 +115,14 @@ public class NoteListActivity extends AppCompatActivity {
             }
         });
 
+        this.garbageNoteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(NoteListActivity.this,DeleteNoteListActivity.class);
+                i.putExtra("idFolder",idFolder);
+                rsLaucherForGarbageNote.launch(i);
+            }
+        });
     }
     public void getAllNote(int id){
         this.listNote = new ArrayList<Note>();
@@ -154,6 +164,9 @@ public class NoteListActivity extends AppCompatActivity {
                     this.listNote.set(this.pos,nAE);
                     this.noteAdapter.notifyItemChanged(this.pos);
                 }
+            });
+            this.rsLaucherForGarbageNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
+
             });
         }
         catch(Exception ex){
