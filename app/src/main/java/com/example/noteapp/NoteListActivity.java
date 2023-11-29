@@ -129,19 +129,6 @@ public class NoteListActivity extends AppCompatActivity {
 
         //Lay ve tat ca ca note trong db
         ArrayList<Note> allNote = new ArrayList<Note>();
-//        Note n1 = new Note(1,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",1);
-//        Note n2 = new Note(2,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
-//        Note n3 = new Note(3,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",2);
-//        Note n4 = new Note(4,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-//        Note n5 = new Note(5,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-//        Note n6 = new Note(6,"Lau nha","Hom nay lau nha.....","2002/22/02","active","/../../..",3);
-//        allNote.add(n1);
-//        allNote.add(n2);
-//        allNote.add(n3);
-//        allNote.add(n4);
-//        allNote.add(n5);
-//        allNote.add(n6);
-        //lay ra cac note co idFolder phu hop
         allNote = this.db.getAllNote();
         for(int i=0;i<allNote.size();i++){
             if(allNote.get(i).getIdFolder() == id){
@@ -166,7 +153,11 @@ public class NoteListActivity extends AppCompatActivity {
                 }
             });
             this.rsLaucherForGarbageNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-
+                if(rs != null && rs.getResultCode() == RESULT_OK){
+                    Note n = (Note) rs.getData().getSerializableExtra("noteRestoreToNoteList");
+                    this.listNote.add(n);
+                    this.noteAdapter.notifyDataSetChanged();
+                }
             });
         }
         catch(Exception ex){

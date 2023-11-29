@@ -44,7 +44,6 @@ public class NoteDeleteAdapter extends RecyclerView.Adapter<NoteDeleteAdapter.No
             clickListeners.onItemClick(getAdapterPosition(),v);
         }
 
-
     }
     @NonNull
     @Override

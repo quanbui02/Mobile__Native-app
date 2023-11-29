@@ -41,6 +41,9 @@ public class DeleteNoteListActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForRestore;
     private DatabaseForApp db;
     private int idFolder;
+    private int pos;
+    private String checkRestore;
+    private Note nR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +60,23 @@ public class DeleteNoteListActivity extends AppCompatActivity {
             alert.setMessage(ex.getMessage());
             alert.show();
         }
-        this.getAllNoteDelete();
+        this.getAllNoteDelete(this.idFolder);
 
         this.headerNoteDText = findViewById(R.id.headerNoteDeleteText);
         this.backNoteDBtn = findViewById(R.id.backNoteDeleteBtn);
         this.searchNoteDText = findViewById(R.id.searchNoteDeleteText);
+        this.checkRestore = "false";
+        this.nR = new Note();
 
         this.noteDeleteAdapter = new NoteDeleteAdapter(this, this.listNoteD, new NoteDeleteAdapter.ClickListeners() {
             @Override
             public void onItemClick(int position, View v) {
-
+                pos = position;
+                Note note = listNoteD.get(pos);
+                Intent i = new Intent(DeleteNoteListActivity.this,AddNoteActivity.class);
+                i.putExtra("flag","restore");
+                i.putExtra("noteR",note);
+                rsLaucherForRestore.launch(i);
             }
         });
 
@@ -74,21 +84,47 @@ public class DeleteNoteListActivity extends AppCompatActivity {
         this.rcNoteDelete.setAdapter(this.noteDeleteAdapter);
         this.rcNoteDelete.addItemDecoration(new DividerItemDecoration(this.rcNoteDelete.getContext(), DividerItemDecoration.VERTICAL));
         this.rcNoteDelete.setLayoutManager(new LinearLayoutManager(this));
+
+        this.backNoteDBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkRestore.equals("true")){
+                    Intent i = new Intent();
+                    i.putExtra("noteRestoreToNoteList",nR);
+                    setResult(RESULT_OK,i);
+                }
+                finish();
+            }
+        });
     }
 
-    public void getAllNoteDelete(){
+    public void getAllNoteDelete(int id){
             this.listNoteD = new ArrayList<Note>();
-            ArrayList<Note> allNote = new ArrayList<>();
-            allNote = this.db.getAllNote();
-            this.listNoteD = allNote;
-            for(int i=0;i<allNote.size();i++){
-                // continute
-            }
+            ArrayList<Note> allNote = new ArrayList<Note>();
+                allNote = this.db.getAllNoteDelete();
+                for(int i=0;i<allNote.size();i++){
+                    if(allNote.get(i).getIdFolder() == id){
+                        this.listNoteD.add(allNote.get(i));
+                    }
+                }
     }
     public void intRS(){
         try{
             this.rsLaucherForRestore = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-
+                if(rs != null && rs.getResultCode() == RESULT_OK){
+                    this.checkRestore = "true";
+                    int positionR = 0;
+                    Note nAR = (Note) rs.getData().getSerializableExtra("noteAR");
+                    this.nR = nAR;
+                    for(int i =0;i<this.listNoteD.size();i++){
+                        if(this.listNoteD.get(i).getId() == nAR.getId()){
+                            positionR = i;
+                            this.listNoteD.remove(i);
+                            break;
+                        }
+                    }
+                    this.noteDeleteAdapter.notifyItemRemoved(positionR);
+                }
             });
         }
         catch(Exception ex){

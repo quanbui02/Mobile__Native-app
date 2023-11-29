@@ -44,6 +44,7 @@ public class AddNoteActivity extends AppCompatActivity {
     private int idFolder;
     private String flag;
     private Note nE;
+    private Note nR;
     private String  check;
     private ActivityResultLauncher<String> rsAddImage;
     private DatabaseForApp db;
@@ -66,7 +67,6 @@ public class AddNoteActivity extends AppCompatActivity {
         try{
             this.idFolder = i.getIntExtra("idFolderAdd",1);
             this.flag = i.getStringExtra("flag");
-            this.nE = (Note) i.getSerializableExtra("noteE");
         }
         catch (Exception ex){
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -75,6 +75,7 @@ public class AddNoteActivity extends AppCompatActivity {
         }
 
         if(this.flag.equals("edit_note")){
+            this.nE = (Note) i.getSerializableExtra("noteE");
             this.titleNoteText.setText(this.nE.getTitle());
             this.contentNoteText.setText(this.nE.getContent());
             try {
@@ -88,6 +89,13 @@ public class AddNoteActivity extends AppCompatActivity {
                 alert.setMessage(ex.getMessage());
                 alert.show();
             }
+        }else{
+            if (this.flag.equals("restore"))
+            this.nR = (Note) i.getSerializableExtra("noteR");
+            this.titleNoteText.setText(this.nR.getTitle());
+            this.contentNoteText.setText(this.nR.getContent());
+//                this.imageNote.setImageURI(Uri.parse(this.nR.getImagePath()));
+            this.editNoteBtn.setText("Khôi phục");
         }
         this.backNoteList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,20 +130,29 @@ public class AddNoteActivity extends AppCompatActivity {
                         alert.show();
                     }
                 }else{
-                    //To do update....
-                    String title = titleNoteText.getText().toString();
-                    String content = contentNoteText.getText().toString();
+                    if(flag.equals("edit_note")) {
+                        //To do update....
+                        String title = titleNoteText.getText().toString();
+                        String content = contentNoteText.getText().toString();
 
-                    Note newNote = new Note(nE.getId(),title,content,nE.getCreateTime(),nE.getStatusN(),nE.getImagePath(),nE.getIdFolder());
-                    if(check.equals("true")){
-                        newNote.setImagePath(imagePath);
+                        Note newNote = new Note(nE.getId(), title, content, nE.getCreateTime(), nE.getStatusN(), nE.getImagePath(), nE.getIdFolder());
+                        if (check.equals("true")) {
+                            newNote.setImagePath(imagePath);
+                        }
+                        // call updateNoteDatabase
+                        db.updateNote(newNote);
+                        Intent i = new Intent();
+                        i.putExtra("noteAE", newNote);
+                        setResult(RESULT_OK, i);
+                        finish();
+                    }else{
+                        Note noteRestore = new Note(nR.getId(),nR.getTitle(),nR.getContent(), nR.getCreateTime(),"active", nR.getImagePath(), nR.getIdFolder());
+                        db.updateNote(noteRestore);
+                        Intent i = new Intent();
+                        i.putExtra("noteAR",noteRestore);
+                        setResult(RESULT_OK,i);
+                        finish();
                     }
-                    // call updateNoteDatabase
-                    db.updateNote(newNote);
-                    Intent i = new Intent();
-                    i.putExtra("noteAE",newNote);
-                    setResult(RESULT_OK,i);
-                    finish();
                 }
             }
         });
