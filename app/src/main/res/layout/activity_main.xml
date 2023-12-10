@@ -14,7 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_below="@+id/searchText"
-        android:layout_marginTop="31dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="-1dp" />
 
     <TextView
         android:id="@+id/TextFolder"
@@ -32,12 +34,12 @@
         android:id="@+id/addFolderButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleFolder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="332dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="323dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="47dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_input_add" />
 
