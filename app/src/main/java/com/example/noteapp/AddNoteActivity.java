@@ -89,13 +89,14 @@ public class AddNoteActivity extends AppCompatActivity {
                 alert.setMessage(ex.getMessage());
                 alert.show();
             }
-        }else{
-            if (this.flag.equals("restore"))
-            this.nR = (Note) i.getSerializableExtra("noteR");
-            this.titleNoteText.setText(this.nR.getTitle());
-            this.contentNoteText.setText(this.nR.getContent());
+        }else {
+            if (this.flag.equals("restore")) {
+                this.nR = (Note) i.getSerializableExtra("noteR");
+                this.titleNoteText.setText(this.nR.getTitle());
+                this.contentNoteText.setText(this.nR.getContent());
 //                this.imageNote.setImageURI(Uri.parse(this.nR.getImagePath()));
-            this.editNoteBtn.setText("Khôi phục");
+                this.editNoteBtn.setText("Khôi phục");
+            }
         }
         this.backNoteList.setOnClickListener(new View.OnClickListener() {
             @Override
