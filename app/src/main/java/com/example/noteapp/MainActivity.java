@@ -26,16 +26,21 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+
+import androidx.appcompat.widget.SearchView;
+
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Folder> listFolder;
     private RecyclerView rcView;
     private FolderAdapter folderAdapter;
     private TextView textFolder;
-    private EditText searchText;
+    private SearchView searchText;
     private FloatingActionButton addFolderBtn;
     private ActivityResultLauncher<Intent> rsLauncherForAdd;
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private int pos;
     private RelativeLayout folder_content;
     private DatabaseForApp db;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,19 @@ public class MainActivity extends AppCompatActivity {
         this.searchText = findViewById(R.id.searchText);
         this.addFolderBtn = findViewById(R.id.addFolderButton);
         this.folder_content = findViewById(R.id.f_content);
+        searchText.clearFocus();
+        searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
         this.folderAdapter = new FolderAdapter(this, this.listFolder, new FolderAdapter.ClickListeners() {
             @Override
             public void onItemLongClick(int position, View v) {
@@ -91,6 +109,20 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("flag", "add");
             this.rsLauncherForAdd.launch(i);
         });
+    }
+
+    private void filterList(String text) {
+        ArrayList<Folder> filteredListFolder = new ArrayList<>();
+        for (Folder folder : listFolder) {
+            if (folder.getName().toLowerCase().contains(text.toLowerCase())) {
+                filteredListFolder.add(folder);
+            }
+        }
+        if (filteredListFolder.isEmpty()) {
+            Toast.makeText(this, "khong tim thay", Toast.LENGTH_LONG).show();
+        } else {
+            this.folderAdapter.setFilteredFolder(filteredListFolder);
+        }
     }
 
     public void getAllFolder() {
