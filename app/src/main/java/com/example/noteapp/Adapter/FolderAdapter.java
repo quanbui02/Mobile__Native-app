@@ -15,6 +15,8 @@ import com.example.noteapp.Model.Folder;
 import com.example.noteapp.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderViewHolder> {
     private Context fContext;
     private ArrayList<Folder> listFolder;
@@ -47,7 +49,10 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.FolderView
         }
     }
     //3 phuong thuc quan trong cua adapter
-
+    public void setFilteredFolder(ArrayList<Folder> filteredFolder) {
+        this.listFolder = filteredFolder;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public FolderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

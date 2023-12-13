@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style android:name="CustomSearchViewStyle"
+    android:parent="Widget.AppCompat.SearchView"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:name="searchIcon">@drawable/baseline_search_black_18.png</item>
+</style>

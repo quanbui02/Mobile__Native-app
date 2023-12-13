@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/f_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/f_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -15,17 +15,19 @@
         android:layout_height="450dp"
         android:layout_below="@+id/searchText"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="-1dp" />
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="147dp" />
 
     <TextView
         android:id="@+id/TextFolder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="147dp"
+        android:layout_alignParentEnd="true"
 
+        android:layout_marginStart="147dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="144dp"
         android:fontFamily="sans-serif-black"
         android:text="Thư mục"
         android:textSize="30dp" />
@@ -43,18 +45,32 @@
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <EditText
+    <!--    <EditText-->
+    <!--        android:id="@+id/searchText"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_alignParentEnd="true"-->
+    <!--        android:layout_marginStart="71dp"-->
+    <!--        android:layout_marginTop="82dp"-->
+    <!--        android:layout_marginEnd="57dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:inputType="text"-->
+    <!--        android:hint="Tìm kiếm thư mục" />-->
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/TextFolder"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="82dp"
-        android:layout_marginEnd="57dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Tìm kiếm thư mục" />
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="58dp"
+        android:background="@drawable/search_bg"
+        app:iconifiedByDefault="false"
+        app:queryHint="Tim kiem thu muc" />
+
 
 </RelativeLayout>
