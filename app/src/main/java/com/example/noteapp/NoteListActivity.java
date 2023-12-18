@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,10 +43,12 @@ public class NoteListActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForAdd;
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private ActivityResultLauncher<Intent> rsLaucherForGarbageNote;
+    private ArrayList<Note> listNoteP;
     private int idFolder;
     private int pos;
     private RelativeLayout main_content;
     private DatabaseForApp db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +58,9 @@ public class NoteListActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         try {
-            this.idFolder=i.getIntExtra("idFolder",1);
+            this.idFolder = i.getIntExtra("idFolder", 1);
             this.getAllNote(this.idFolder);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());
             alert.show();
@@ -81,8 +83,16 @@ public class NoteListActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return false;
+                if (newText == "") {
+                    listNote = listNoteP;
+                    noteAdapter.notifyDataSetChanged();
+                    Toast toast = Toast.makeText(NoteListActivity.this, "Không tìm thấy", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toast.show();
+                } else {
+                    filterList(newText);
+                }
+                return true;
             }
         });
         this.noteAdapter = new NoteAdapter(this, this.listNote, new NoteAdapter.ClickListeners() {
@@ -90,16 +100,16 @@ public class NoteListActivity extends AppCompatActivity {
             public void onItemClick(int position, View v) {
                 pos = position;
                 Note note = listNote.get(pos);
-                Intent i = new Intent(NoteListActivity.this,AddNoteActivity.class);
-                i.putExtra("flag","edit_note");
-                i .putExtra("noteE",note);
+                Intent i = new Intent(NoteListActivity.this, AddNoteActivity.class);
+                i.putExtra("flag", "edit_note");
+                i.putExtra("noteE", note);
                 rsLaucherForUpdate.launch(i);
             }
 
             @Override
             public void onItemLongClick(int position, View v) {
                 Snackbar mySnackbar = Snackbar.make(main_content, "Bạn có muốn xoá ghi chú này ?", Snackbar.LENGTH_SHORT);
-                mySnackbar.setAction("Đồng ý", view-> {
+                mySnackbar.setAction("Đồng ý", view -> {
                     pos = position;
                     Note note = listNote.get(pos);
                     //Call updateNote(id) to delete
@@ -125,9 +135,9 @@ public class NoteListActivity extends AppCompatActivity {
         this.addNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NoteListActivity.this,AddNoteActivity.class);
-                i.putExtra("flag","add_note");
-                i.putExtra("idFolderAdd",idFolder);
+                Intent i = new Intent(NoteListActivity.this, AddNoteActivity.class);
+                i.putExtra("flag", "add_note");
+                i.putExtra("idFolderAdd", idFolder);
                 rsLaucherForAdd.launch(i);
             }
         });
@@ -135,8 +145,8 @@ public class NoteListActivity extends AppCompatActivity {
         this.garbageNoteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NoteListActivity.this,DeleteNoteListActivity.class);
-                i.putExtra("idFolder",idFolder);
+                Intent i = new Intent(NoteListActivity.this, DeleteNoteListActivity.class);
+                i.putExtra("idFolder", idFolder);
                 rsLaucherForGarbageNote.launch(i);
             }
         });
@@ -144,59 +154,54 @@ public class NoteListActivity extends AppCompatActivity {
 
     private void filterList(String text) {
         ArrayList<Note> filteredListNote = new ArrayList<>();
-        for (Note nte : listNote) {
+        for (Note nte : listNoteP) {
             if (nte.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 filteredListNote.add(nte);
             }
         }
-        if (filteredListNote.isEmpty()) {
-            this.noteAdapter.setFilteredNote(filteredListNote);
-            Toast toast = Toast.makeText(this, "Không tìm thấy", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
-            toast.show();
-
-        } else {
-            this.noteAdapter.setFilteredNote(filteredListNote);
-        }
+        this.noteAdapter.setFilteredNote(filteredListNote);
+        this.listNote = filteredListNote;
+        this.noteAdapter.notifyDataSetChanged();
     }
 
-    public void getAllNote(int id){
+    public void getAllNote(int id) {
         this.listNote = new ArrayList<Note>();
-
+        this.listNoteP = new ArrayList<Note>();
         //Lay ve tat ca ca note trong db
         ArrayList<Note> allNote = new ArrayList<Note>();
         allNote = this.db.getAllNote();
-        for(int i=0;i<allNote.size();i++){
-            if(allNote.get(i).getIdFolder() == id){
+        for (int i = 0; i < allNote.size(); i++) {
+            if (allNote.get(i).getIdFolder() == id) {
                 this.listNote.add(allNote.get(i));
             }
         }
+        this.listNoteP = listNote;
     }
-    public void initRsLauncher(){
-        try{
-            this.rsLaucherForAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-                if(rs != null && rs.getResultCode() == RESULT_OK){
+
+    public void initRsLauncher() {
+        try {
+            this.rsLaucherForAdd = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
+                if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("new_note");
                     this.listNote.add(n);
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });
-            this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-                if(rs  != null && rs.getResultCode() == RESULT_OK){
+            this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
+                if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note nAE = (Note) rs.getData().getSerializableExtra("noteAE");
-                    this.listNote.set(this.pos,nAE);
+                    this.listNote.set(this.pos, nAE);
                     this.noteAdapter.notifyItemChanged(this.pos);
                 }
             });
-            this.rsLaucherForGarbageNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),rs->{
-                if(rs != null && rs.getResultCode() == RESULT_OK){
+            this.rsLaucherForGarbageNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
+                if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("noteRestoreToNoteList");
                     this.listNote.add(n);
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());
             alert.show();
