@@ -28,6 +28,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         this.clickListeners = cl;
     }
 
+    public void setFilteredNote(ArrayList<Note> filteredListNote) {
+        this.listNote = filteredListNote;
+        notifyDataSetChanged();
+    }
+
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
         TextView titleNoteText,dateNoteText;
         ImageView imageViewNote;

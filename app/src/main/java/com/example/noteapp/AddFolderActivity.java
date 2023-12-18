@@ -56,14 +56,21 @@ public class AddFolderActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(flag.equals("add")) {
                     try {
-                        Folder f = new Folder(1,nameFolderText.getText().toString(),"active");
-                        //call addFolder() and get id from function then set newID for folder
-                        long newIDF = db.addFolder(f);
-                        f.setId((int) newIDF);
-                        Intent i = new Intent();
-                        i.putExtra("folder",f);
-                        setResult(RESULT_OK,i);
-                        finish();
+                        if(nameFolderText.getText().toString().length() <= 0) {
+                            AlertDialog.Builder alert = new AlertDialog.Builder(AddFolderActivity.this);
+                            alert.setMessage("Dien ten thu muc");
+                            alert.show();
+                        }
+                        else {
+                            Folder f = new Folder(1,nameFolderText.getText().toString(),"active");
+                            //call addFolder() and get id from function then set newID for folder
+                            long newIDF = db.addFolder(f);
+                            f.setId((int) newIDF);
+                            Intent i = new Intent();
+                            i.putExtra("folder",f);
+                            setResult(RESULT_OK,i);
+                            finish();
+                        }
                     }
                     catch (Exception ex){
                         AlertDialog.Builder alert = new AlertDialog.Builder(AddFolderActivity.this);

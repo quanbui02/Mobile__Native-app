@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -119,7 +120,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (filteredListFolder.isEmpty()) {
-            Toast.makeText(this, "khong tim thay", Toast.LENGTH_LONG).show();
+            this.folderAdapter.setFilteredFolder(filteredListFolder);
+            Toast toast = Toast.makeText(this, "Không tìm thấy", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+            toast.show();
         } else {
             this.folderAdapter.setFilteredFolder(filteredListFolder);
         }
