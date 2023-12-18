@@ -4,5 +4,5 @@
     <stroke android:color="@color/black"
         android:width="2dp"/>
     <!-- Thêm màu nền -->
-    <solid android:color="@android:color/darker_gray"/>
+    <solid android:color="@android:color/white"/>
 </shape>

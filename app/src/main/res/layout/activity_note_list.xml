@@ -11,11 +11,11 @@
 
     <Button
         android:id="@+id/backNoteDeleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="28dp"
         android:text="Trở về" />
 
@@ -29,7 +29,7 @@
         android:layout_marginEnd="289dp"
         android:fontFamily="sans-serif-black"
         android:text="Ghi chú"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/white"
         android:textSize="30dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -52,14 +52,14 @@
 <!--        android:hint="Tìm kiếm ghi chú" />-->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchNoteDeleteText"
-        android:layout_width="355dp"
-        android:layout_height="40dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/headerNoteDeleteText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="27dp"
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
         app:queryHint="Tim kiem" />
@@ -68,22 +68,24 @@
         android:id="@+id/addNoteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="324dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="47dp"
         android:clickable="true"
+        app:backgroundTint="#cfa400"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deleteNoteListBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="47dp"
         android:clickable="true"
+        app:backgroundTint="#cfa400"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
 
