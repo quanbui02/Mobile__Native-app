@@ -37,17 +37,30 @@
         android:layout_below="@+id/searchNoteDeleteText"
         android:layout_marginTop="17dp" />
 
-    <EditText
+<!--    <EditText-->
+<!--        android:id="@+id/searchNoteDeleteText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/headerNoteDeleteText"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginEnd="100dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="text"-->
+<!--        android:hint="Tìm kiếm ghi chú" />-->
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/searchNoteDeleteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerNoteDeleteText"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Tìm kiếm ghi chú" />
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="58dp"
+        android:background="@drawable/search_bg"
+        app:iconifiedByDefault="false"
+        app:queryHint="Tim kiem" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNoteBtn"
