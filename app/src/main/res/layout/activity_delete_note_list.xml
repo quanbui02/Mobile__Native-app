@@ -36,22 +36,8 @@
         android:id="@+id/recycleNoteDelete"
         android:layout_width="match_parent"
         android:layout_height="450dp"
-        android:layout_below="@+id/searchNoteDeleteText"
-        android:layout_marginTop="17dp" />
-
-    <EditText
-        android:id="@+id/searchNoteDeleteText"
-        android:layout_width="356dp"
-        android:layout_height="36dp"
         android:layout_below="@+id/headerNoteDeleteText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="31dp"
-        android:background="@drawable/search_bg"
-        android:ems="10"
-        android:paddingLeft="10dp"
-        android:hint="Tìm kiếm ghi chú"
-        android:inputType="text" />
+        android:layout_marginTop="19dp" />
 
 
 </RelativeLayout>

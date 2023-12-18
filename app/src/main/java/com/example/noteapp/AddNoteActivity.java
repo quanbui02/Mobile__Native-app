@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
 import com.example.noteapp.Database.DatabaseForApp;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.snackbar.Snackbar;
@@ -15,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -136,7 +138,6 @@ public class AddNoteActivity extends AppCompatActivity {
                         //To do update....
                         String title = titleNoteText.getText().toString();
                         String content = contentNoteText.getText().toString();
-
                         Note newNote = new Note(nE.getId(), title, content, nE.getCreateTime(), nE.getStatusN(), nE.getImagePath(), nE.getIdFolder());
                         if (check.equals("true")) {
                             newNote.setImagePath(imagePath);
@@ -172,6 +173,12 @@ public class AddNoteActivity extends AppCompatActivity {
                 public void onActivityResult(Uri o) {
                     imageNote.setImageURI(o);
                     imagePath = o.toString();
+                    String img = imagePath;
+                    Uri imageUri = Uri.parse(img);
+                    ImageView imageView = findViewById(R.id.imageNoteView);
+                    Glide.with(AddNoteActivity.this)
+                            .load(imageUri)
+                            .into(imageView);
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddNoteActivity.this);
                     alert.setMessage(imagePath);
                     alert.show();

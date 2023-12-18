@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.noteapp.Adapter.NoteAdapter;
 import com.example.noteapp.Database.DatabaseForApp;
+import com.example.noteapp.Model.Folder;
 import com.example.noteapp.Model.Note;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,12 +15,15 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,7 +33,7 @@ import java.util.ArrayList;
 public class NoteListActivity extends AppCompatActivity {
     private FloatingActionButton addNoteBtn;
     private TextView headerNoteText;
-    private EditText searchNoteText;
+    private SearchView searchNoteText;
     private Button backNoteBtn;
     private RecyclerView rcNoteView;
     private NoteAdapter noteAdapter;
@@ -68,6 +72,19 @@ public class NoteListActivity extends AppCompatActivity {
         this.garbageNoteBtn = findViewById(R.id.deleteNoteListBtn);
         this.main_content = findViewById(R.id.note_list_content);
 
+        searchNoteText.clearFocus();
+        searchNoteText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
         this.noteAdapter = new NoteAdapter(this, this.listNote, new NoteAdapter.ClickListeners() {
             @Override
             public void onItemClick(int position, View v) {
@@ -124,6 +141,25 @@ public class NoteListActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void filterList(String text) {
+        ArrayList<Note> filteredListNote = new ArrayList<>();
+        for (Note nte : listNote) {
+            if (nte.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                filteredListNote.add(nte);
+            }
+        }
+        if (filteredListNote.isEmpty()) {
+            this.noteAdapter.setFilteredNote(filteredListNote);
+            Toast toast = Toast.makeText(this, "Không tìm thấy", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+            toast.show();
+
+        } else {
+            this.noteAdapter.setFilteredNote(filteredListNote);
+        }
+    }
+
     public void getAllNote(int id){
         this.listNote = new ArrayList<Note>();
 
