@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".DeleteNoteListActivity">
 
     <Button
@@ -14,8 +15,8 @@
         android:layout_height="38dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="311dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="18dp"
         android:text="Trở về" />
 
     <TextView
@@ -24,10 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="255dp"
         android:fontFamily="sans-serif-black"
         android:text="Thùng rác"
+        android:textColor="@android:color/darker_gray"
         android:textSize="30dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -39,15 +41,17 @@
 
     <EditText
         android:id="@+id/searchNoteDeleteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="356dp"
+        android:layout_height="36dp"
         android:layout_below="@+id/headerNoteDeleteText"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="31dp"
+        android:background="@drawable/search_bg"
         android:ems="10"
-        android:inputType="text"
-        android:hint="Tìm kiếm ghi chú" />
+        android:paddingLeft="10dp"
+        android:hint="Tìm kiếm ghi chú"
+        android:inputType="text" />
 
 
 </RelativeLayout>

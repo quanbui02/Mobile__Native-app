@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".AddFolderActivity">
 
     <Button
@@ -29,16 +30,17 @@
 
     <EditText
         android:id="@+id/noteTitleText"
-        android:layout_width="359dp"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="41dp"
         android:layout_below="@+id/backNoteListBtn"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginEnd="27dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/search_bg"
         android:ems="10"
-        android:inputType="text"
         android:hint="Tiêu đề..."
-        />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/noteContentText"
@@ -50,7 +52,9 @@
         android:layout_marginEnd="26dp"
         android:ems="10"
         android:hint="Nhập ghi chú tại đây..."
+        android:background="@drawable/search_bg"
         android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
         android:minHeight="150dp" />
 
     <ImageView
@@ -58,7 +62,9 @@
         android:layout_width="355dp"
         android:layout_height="292dp"
         android:layout_below="@+id/noteContentText"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="30dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
@@ -69,8 +75,8 @@
         android:layout_height="39dp"
         android:layout_below="@+id/imageNoteView"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="185dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="173dp"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </RelativeLayout>

@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".MainActivity">
 
 
@@ -20,16 +21,17 @@
 
     <TextView
         android:id="@+id/TextFolder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="54dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
 
-        android:layout_marginStart="147dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="144dp"
+        android:layout_marginEnd="175dp"
         android:fontFamily="sans-serif-black"
         android:text="Thư mục"
+        android:textColor="@android:color/darker_gray"
         android:textSize="30dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,25 +41,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="323dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginStart="322dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="48dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/searchText"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_marginStart="71dp"-->
-    <!--        android:layout_marginTop="82dp"-->
-    <!--        android:layout_marginEnd="57dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:inputType="text"-->
-    <!--        android:hint="Tìm kiếm thư mục" />-->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchText"
         android:layout_width="wrap_content"
@@ -65,9 +54,9 @@
         android:layout_below="@+id/TextFolder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="26dp"
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
         app:queryHint="Tim kiem thu muc" />
