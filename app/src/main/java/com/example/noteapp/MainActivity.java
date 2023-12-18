@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private ActivityResultLauncher<Intent> rsLaucherForNote;
     private int pos;
+    private ArrayList<Folder> listFolderP;
     private RelativeLayout folder_content;
     private DatabaseForApp db;
     private SearchView searchView;
@@ -69,11 +70,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return false;
+
+                if (newText == "") {
+                    listFolder = listFolderP;
+                    folderAdapter.notifyDataSetChanged();
+                    Toast toast = Toast.makeText(MainActivity.this, "Không tìm thấy", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toast.show();
+                } else {
+                    filterList(newText);
+                }
+                return true;
             }
         });
         this.folderAdapter = new FolderAdapter(this, this.listFolder, new FolderAdapter.ClickListeners() {
@@ -114,25 +123,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void filterList(String text) {
         ArrayList<Folder> filteredListFolder = new ArrayList<>();
-        for (Folder folder : listFolder) {
+        for (Folder folder : listFolderP) {
             if (folder.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredListFolder.add(folder);
             }
         }
-        if (filteredListFolder.isEmpty()) {
             this.folderAdapter.setFilteredFolder(filteredListFolder);
-            Toast toast = Toast.makeText(this, "Không tìm thấy", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
-            toast.show();
-        } else {
-            this.folderAdapter.setFilteredFolder(filteredListFolder);
-        }
+            this.listFolder = filteredListFolder;
+            this.folderAdapter.notifyDataSetChanged();
     }
 
     public void getAllFolder() {
         try {
 //            //Lay ra tat ca cac folder tu db
             this.listFolder = new ArrayList<Folder>();
+            this.listFolderP = new ArrayList<Folder>();
 //            Folder f1 = new Folder(1, "Folder1", "active");
 //            this.listFolder.add(f1);
 //            Folder f2 = new Folder(2, "Folder2", "active");
@@ -140,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 //            Folder f3 = new Folder(3, "Folder3", "active");
 //            this.listFolder.add(f3);
             this.listFolder = this.db.getAllFolder();
+            this.listFolderP = this.listFolder;
         } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());

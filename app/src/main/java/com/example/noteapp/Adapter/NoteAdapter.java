@@ -1,6 +1,7 @@
 package com.example.noteapp.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.noteapp.AddNoteActivity;
 import com.example.noteapp.Model.Folder;
 import com.example.noteapp.Model.Note;
 import com.example.noteapp.R;
@@ -69,6 +72,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         holder.titleNoteText.setText(note.getTitle());
         holder.dateNoteText.setText(note.getCreateTime());
 //        holder.imageViewNote.setImageURI();
+        String img = note.getImagePath();
+        Uri imageUri = Uri.parse(img);
+        Glide.with(holder.imageViewNote)
+                .load(imageUri)
+                .into(holder.imageViewNote);
     }
     @Override
     public int getItemCount() {
