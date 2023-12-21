@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private FolderAdapter folderAdapter;
     private TextView textFolder;
     private SearchView searchText;
-    private FloatingActionButton addFolderBtn;
+    private FloatingActionButton addFolderBtn, garbageFolderBtn;
     private ActivityResultLauncher<Intent> rsLauncherForAdd;
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private ActivityResultLauncher<Intent> rsLaucherForNote;
+    private ActivityResultLauncher<Intent> getRsLauncherForGarbage;
     private int pos;
+    private ArrayList<Folder> listFolderP;
     private ConstraintLayout folder_content;
     private DatabaseForApp db;
     private SearchView searchView;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         this.searchText = findViewById(R.id.searchText);
         this.addFolderBtn = findViewById(R.id.addFolderButton);
         this.folder_content = findViewById(R.id.f_content);
+        this.garbageFolderBtn = findViewById(R.id.garbageFolderBtn);
         searchText.clearFocus();
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -61,8 +64,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return false;
+
+                if (newText == "") {
+                    listFolder = listFolderP;
+                    folderAdapter.notifyDataSetChanged();
+                    Toast toast = Toast.makeText(MainActivity.this, "Không tìm thấy", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+                    toast.show();
+                } else {
+                    filterList(newText);
+                }
+                return true;
             }
         });
         this.folderAdapter = new FolderAdapter(this, this.listFolder, new FolderAdapter.ClickListeners() {
@@ -99,29 +111,29 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("flag", "add");
             this.rsLauncherForAdd.launch(i);
         });
+        this.garbageFolderBtn.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, DeleteFolderActivity.class);
+            this.getRsLauncherForGarbage.launch(i);
+        });
     }
 
     private void filterList(String text) {
         ArrayList<Folder> filteredListFolder = new ArrayList<>();
-        for (Folder folder : listFolder) {
+        for (Folder folder : listFolderP) {
             if (folder.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredListFolder.add(folder);
             }
         }
-        if (filteredListFolder.isEmpty()) {
-            this.folderAdapter.setFilteredFolder(filteredListFolder);
-            Toast toast = Toast.makeText(this, "Không tìm thấy", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
-            toast.show();
-        } else {
-            this.folderAdapter.setFilteredFolder(filteredListFolder);
-        }
+        this.folderAdapter.setFilteredFolder(filteredListFolder);
+        this.listFolder = filteredListFolder;
+        this.folderAdapter.notifyDataSetChanged();
     }
 
     public void getAllFolder() {
         try {
 //            //Lay ra tat ca cac folder tu db
             this.listFolder = new ArrayList<Folder>();
+            this.listFolderP = new ArrayList<Folder>();
 //            Folder f1 = new Folder(1, "Folder1", "active");
 //            this.listFolder.add(f1);
 //            Folder f2 = new Folder(2, "Folder2", "active");
@@ -129,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 //            Folder f3 = new Folder(3, "Folder3", "active");
 //            this.listFolder.add(f3);
             this.listFolder = this.db.getAllFolder();
+            this.listFolderP = this.listFolder;
         } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setMessage(ex.getMessage());
@@ -147,12 +160,40 @@ public class MainActivity extends AppCompatActivity {
             });
             this.rsLaucherForUpdate = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
+                    String result_flag = (String) rs.getData().getStringExtra("result_flag");
                     Folder fAE = (Folder) rs.getData().getSerializableExtra("fAE");
-                    this.listFolder.set(this.pos, fAE);
-                    this.folderAdapter.notifyItemChanged(this.pos);
+                    if (result_flag.equals("delete")) {
+//                        pos = position;
+//                        Note note = listNote.get(pos);
+//                        //Call updateNote(id) to delete
+//                        note.setStatusN("not active");
+//                        db.updateNote(note);
+//                        listNote.remove(pos);
+//                        noteAdapter.notifyItemRemoved(pos);
+                        int target = 0;
+                        for (int i = 0; i < listFolderP.size(); i++) {
+                            if (listFolderP.get(i).getId() == fAE.getId()) {
+                                target = i;
+
+                            }
+                        }
+                        Folder rmFolder = this.listFolder.get(target);
+                        this.listFolder.remove(rmFolder);
+                        this.folderAdapter.notifyItemRemoved(target);
+                    } else {
+                        this.listFolder.set(this.pos, fAE);
+                        this.folderAdapter.notifyItemChanged(this.pos);
+                    }
                 }
             });
             this.rsLaucherForNote = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
+            });
+            this.getRsLauncherForGarbage = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), rs -> {
+                if(rs != null && rs.getResultCode() == RESULT_OK){
+                    Folder fRestore = (Folder) rs.getData().getSerializableExtra("fRestore");
+                    listFolder.add(fRestore);
+                    folderAdapter.notifyDataSetChanged();
+                }
             });
         } catch (Exception ex) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);

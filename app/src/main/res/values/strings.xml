@@ -47,4 +47,5 @@
     <string name="title_activity_add_folder">AddFolderActivity</string>
     <string name="title_activity_add_note">AddNoteActivity</string>
     <string name="title_activity_delete_note_list">DeleteNoteListActivity</string>
+    <string name="title_activity_delete_folder">DeleteFolderActivity</string>
 </resources>

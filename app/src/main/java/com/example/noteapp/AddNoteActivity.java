@@ -69,6 +69,11 @@ public class AddNoteActivity extends AppCompatActivity {
             this.titleNoteText.setText(this.nE.getTitle());
             this.contentNoteText.setText(this.nE.getContent());
             try {
+                String img = this.nE.getImagePath();
+                Uri imageUri = Uri.parse(img);
+                Glide.with(this.imageNote)
+                        .load(imageUri)
+                        .into(this.imageNote);
 //                this.imageNote.setImageURI(Uri.parse(this.nE.getImagePath()));
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
                 alert.setMessage(this.nE.getImagePath());
@@ -160,12 +165,6 @@ public class AddNoteActivity extends AppCompatActivity {
                 public void onActivityResult(Uri o) {
                     imageNote.setImageURI(o);
                     imagePath = o.toString();
-                    String img = imagePath;
-                    Uri imageUri = Uri.parse(img);
-                    ImageView imageView = findViewById(R.id.imageNoteView);
-                    Glide.with(AddNoteActivity.this)
-                            .load(imageUri)
-                            .into(imageView);
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddNoteActivity.this);
                     alert.setMessage(imagePath);
                     alert.show();
