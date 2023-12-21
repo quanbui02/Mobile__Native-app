@@ -22,6 +22,7 @@ public class AddFolderActivity extends AppCompatActivity {
     private EditText nameFolderText;
     private Button editFolderBtn;
     private Button backButton;
+    private Button deleteBtn;
     private String flag;
     private Folder fE;
     private DatabaseForApp db;
@@ -36,6 +37,8 @@ public class AddFolderActivity extends AppCompatActivity {
         this.nameFolderText = findViewById(R.id.editNameFolder);
         this.editFolderBtn = findViewById(R.id.editFolderBtn);
         this.backButton= findViewById(R.id.backOnEditFolder);
+        this.deleteBtn=findViewById(R.id.deleteBtn);
+        this.deleteBtn.setVisibility(View.GONE);
 
         Intent i = getIntent();
         this.flag = i.getStringExtra("flag");
@@ -46,6 +49,8 @@ public class AddFolderActivity extends AppCompatActivity {
             this.editFolderBtn.setText("Lưu lại");
 
             this.nameFolderText.setText(this.fE.getName());
+            this.deleteBtn.setVisibility(View.VISIBLE);
+
         }else {
             this.headerText.setText("Tạo mới thư mục");
             this.editFolderBtn.setText("Tạo mới");
@@ -68,6 +73,7 @@ public class AddFolderActivity extends AppCompatActivity {
                             f.setId((int) newIDF);
                             Intent i = new Intent();
                             i.putExtra("folder",f);
+                            i.putExtra("result_flag","add");
                             setResult(RESULT_OK,i);
                             finish();
                         }
@@ -85,6 +91,7 @@ public class AddFolderActivity extends AppCompatActivity {
                         db.updateFolder(fAE);
                         Intent i = new Intent();
                         i.putExtra("fAE",fAE);
+                        i.putExtra("result_flag","update");
                         setResult(RESULT_OK,i);
                         finish();
                     }
@@ -102,7 +109,26 @@ public class AddFolderActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        this.deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    Folder fAE = new Folder(fE.getId(),fE.getName().toString(),"not active");
+                    //call updateFolderDatabase
+                    db.updateFolder(fAE);
+                    Intent i = new Intent();
+                    i.putExtra("fAE",fAE);
+                    i.putExtra("result_flag","delete");
+                    setResult(RESULT_OK,i);
+                    finish();
+                }
+                catch(Exception ex){
+                    AlertDialog.Builder alert = new AlertDialog.Builder(AddFolderActivity.this);
+                    alert.setMessage(ex.getMessage());
+                    alert.show();
+                }
+            }
+        });
     }
 
 }

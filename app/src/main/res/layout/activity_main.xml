@@ -43,6 +43,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="47dp"
         android:clickable="true"
+        tools:ignore="SpeakableTextPresentCheck"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <!--    <EditText-->
@@ -71,6 +72,18 @@
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
         app:queryHint="Tim kiem thu muc" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/garbageFolderBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recycleFolder"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-103dp"
+        android:layout_marginEnd="327dp"
+        android:clickable="true"
+        tools:ignore="SpeakableTextPresentCheck"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
 
 
 </RelativeLayout>
