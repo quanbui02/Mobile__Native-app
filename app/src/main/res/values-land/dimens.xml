@@ -1,3 +1,8 @@
 <resources>
-    <dimen name="fab_margin">48dp</dimen>
+    <dimen name="marginTop_headerText_add_folder">64dp</dimen>
+    <dimen name="marginTop_input_add_folder">120dp</dimen>
+    <dimen name="marginRight_ButtonAdd_add_folder">146dp</dimen>
+    <dimen name="marginTop_ButtonAdd_add_folder">296dp</dimen>
+    <dimen name="marginRight_ButtonBack_add_folder">146dp</dimen>
+    <dimen name="marginTop_ButtonBack_add_folder">296dp</dimen>
 </resources>

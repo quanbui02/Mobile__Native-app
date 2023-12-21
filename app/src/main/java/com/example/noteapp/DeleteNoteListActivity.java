@@ -1,33 +1,24 @@
 package com.example.noteapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.noteapp.Adapter.NoteDeleteAdapter;
-import com.example.noteapp.Database.DatabaseForApp;
-import com.example.noteapp.Model.Note;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.noteapp.databinding.ActivityDeleteNoteListBinding;
+import com.example.noteapp.Adapter.NoteDeleteAdapter;
+import com.example.noteapp.Database.DatabaseForApp;
+import com.example.noteapp.Model.Note;
 
 import java.util.ArrayList;
 
@@ -45,6 +36,7 @@ public class DeleteNoteListActivity extends AppCompatActivity {
     private String checkRestore;
     private Note nR;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

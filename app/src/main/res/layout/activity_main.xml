@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/f_content"
@@ -12,55 +12,68 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleFolder"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_width="0dp"
+        android:layout_height="576dp"
         android:layout_below="@+id/searchText"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="147dp" />
+        android:minWidth="1000dp"
+        android:minHeight="1000dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/TextFolder"
-        android:layout_width="153dp"
-        android:layout_height="54dp"
+        android:layout_width="@dimen/width_Text_list_folder"
+        android:layout_height="@dimen/height_Text_list_folder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="175dp"
+        android:layout_marginStart="@dimen/marginLeft_Text_list_folder"
+        android:layout_marginTop="@dimen/marginTop_Text_list_folder"
         android:fontFamily="sans-serif-black"
         android:text="Thư mục"
         android:textColor="@android:color/white"
-        android:textSize="30dp" />
+        android:textSize="@dimen/size_Text_list_folder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFolderButton"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="323dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="47dp"
-        app:backgroundTint="#cfa400"
+        android:layout_marginBottom="@dimen/marginBottom_button_add_list_folder"
+        android:background="@drawable/primary_color_button"
         android:clickable="true"
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_input_list_folder"
         android:layout_below="@+id/TextFolder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="@dimen/marginTop_input_list_folder"
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
-        app:queryHint="Tim kiem thu muc" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        app:queryHint="Tim kiem thu muc"
+        tools:ignore="MissingConstraints" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,35 +13,48 @@
         android:id="@+id/headerAddFolder"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:textSize="14sp"
+        android:layout_marginTop="@dimen/marginTop_headerText_add_folder"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="156dp"
         android:fontFamily="sans-serif-black"
         android:text="Flag 1-Add,2-edit"
-        android:textSize="14sp" />
+        app:layout_constraintBottom_toTopOf="@+id/editNameFolder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/editNameFolder"
-        android:layout_width="370dp"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/marginTop_input_add_folder"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerAddFolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
+        android:hint="Nhập tên thư mục...."
         android:inputType="text"
-        android:hint="Nhập tên thư mục...." />
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/editFolderBtn"
+        android:layout_marginStart="@dimen/marginRight_ButtonAdd_add_folder"
+        android:layout_marginTop="@dimen/marginTop_ButtonAdd_add_folder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editNameFolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="214dp"
-        android:text="Tao moi" />
+        android:backgroundTint="@color/primary_color"
+        android:textColor="@color/white"
+        android:text="Tạo mới"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/backOnEditFolder"
@@ -49,8 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editFolderBtn"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-50dp"
-        android:layout_marginEnd="109dp"
-        android:text="Trở về" />
+        android:layout_marginTop="@dimen/marginTop_ButtonBack_add_folder"
+        android:layout_marginEnd="@dimen/marginRight_ButtonBack_add_folder"
+        android:backgroundTint="@color/back_button_color"
+        android:text="Trở về"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

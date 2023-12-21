@@ -1,40 +1,29 @@
 package com.example.noteapp;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.example.noteapp.Adapter.FolderAdapter;
-import com.example.noteapp.Database.DatabaseForApp;
-import com.example.noteapp.Model.Folder;
-import com.example.noteapp.Model.Note;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import android.view.Gravity;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-
-import androidx.appcompat.widget.SearchView;
-
-import android.widget.TextView;
-import android.widget.Toast;
+import com.example.noteapp.Adapter.FolderAdapter;
+import com.example.noteapp.Database.DatabaseForApp;
+import com.example.noteapp.Model.Folder;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Folder> listFolder;
@@ -47,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> rsLaucherForUpdate;
     private ActivityResultLauncher<Intent> rsLaucherForNote;
     private int pos;
-    private RelativeLayout folder_content;
+    private ConstraintLayout folder_content;
     private DatabaseForApp db;
     private SearchView searchView;
 
