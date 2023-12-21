@@ -149,6 +149,24 @@ public class DatabaseForApp extends SQLiteOpenHelper {
         }
         return noteListDelete;
     }
+    public ArrayList<Folder> getAllFolderDelete(){
+        ArrayList<Folder> folderListDelete = new ArrayList<Folder>();
+        String selectQuery = "SELECT  * FROM Folder WHERE statusG = 'not active'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if (cursor.moveToFirst()) {
+            do {
+                Folder f = new Folder();
+                f.setId(cursor.getInt(0));
+                f.setName(cursor.getString(1));
+                f.setStatusG(cursor.getString(2));
+
+                folderListDelete.add(f);
+            } while (cursor.moveToNext());
+        }
+        return folderListDelete;
+    }
     public int updateFolder(Folder folder) {
         SQLiteDatabase db = this.getWritableDatabase();
 
