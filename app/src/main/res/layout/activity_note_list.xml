@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/note_list_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".NoteListActivity">
 
     <Button
         android:id="@+id/backNoteDeleteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_width="99dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="311dp"
-        android:text="Trở về" />
+        android:layout_marginTop="@dimen/marginTop_ButtonBack_note_list"
+        android:layout_marginEnd="@dimen/marginRight_ButtonBack_note_list"
+        android:backgroundTint="@color/back_button_color"
+        android:textColor="@color/white"
+        android:text="Trở về"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/headerNoteDeleteText"
@@ -24,65 +29,78 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="154dp"
+        android:layout_marginStart="@dimen/marginLeft_textHeader_note_list"
+        android:layout_marginTop="@dimen/marginTop_textHeader_note_list"
         android:fontFamily="sans-serif-black"
         android:text="Ghi chú"
-        android:textSize="30dp" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textSize_textHeader_note_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleNoteDelete"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_width="0dp"
+        android:layout_height="566dp"
         android:layout_below="@+id/searchNoteDeleteText"
-        android:layout_marginTop="17dp" />
+        android:minWidth="1000dp"
+        android:minHeight="1000dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/searchNoteDeleteText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/headerNoteDeleteText"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginTop="15dp"-->
-<!--        android:layout_marginEnd="100dp"-->
-<!--        android:ems="10"-->
-<!--        android:inputType="text"-->
-<!--        android:hint="Tìm kiếm ghi chú" />-->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchNoteDeleteText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.9"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerNoteDeleteText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginTop="@dimen/marginTop_inputSearch_note_list"
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
-        app:queryHint="Tim kiem" />
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Tim kiem"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addNoteBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="324dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/marginLeft_buttonAdd_note_list"
+        android:layout_marginBottom="@dimen/marginBottom_buttonAdd_note_list"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/deleteNoteListBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recycleNoteDelete"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/marginRight_buttonDelete_note_list"
+        android:layout_marginBottom="@dimen/marginBottom_buttonDelete_note_list"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="MissingConstraints" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
