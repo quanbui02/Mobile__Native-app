@@ -10,28 +10,30 @@
 
     <Button
         android:id="@+id/backNoteListBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_buttonBack_add_note"
+        android:layout_height="@dimen/height_buttonBack_add_note"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/marginTop_ButtonBack_add_note"
-        android:layout_marginEnd="@dimen/marginTop_ButtonBack_add_note"
+        android:layout_marginEnd="@dimen/marginRight_ButtonBack_add_note"
         android:backgroundTint="@color/back_button_color"
         android:text="Trở về"
+        android:textSize="@dimen/textSize_button_add_note"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/editNoteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_buttonDone_add_note"
+        android:layout_height="@dimen/height_buttonDone_add_note"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="@dimen/marginLeft_ButtonAdd_add_note"
         android:layout_marginTop="@dimen/marginTop_ButtonAdd_add_note"
         android:backgroundTint="@color/primary_color"
         android:text="Xong"
+        android:textSize="@dimen/textSize_button_add_note"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

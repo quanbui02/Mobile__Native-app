@@ -12,16 +12,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -121,6 +111,7 @@ public class NoteListActivity extends AppCompatActivity {
                     note.setStatusN("not active");
                     db.updateNote(note);
                     listNote.remove(pos);
+                    listNoteP=listNote;
                     noteAdapter.notifyItemRemoved(pos);
                 });
                 mySnackbar.show();
@@ -189,6 +180,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("new_note");
                     this.listNote.add(n);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });
@@ -196,6 +188,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note nAE = (Note) rs.getData().getSerializableExtra("noteAE");
                     this.listNote.set(this.pos, nAE);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyItemChanged(this.pos);
                 }
             });
@@ -203,6 +196,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("noteRestoreToNoteList");
                     this.listNote.add(n);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });

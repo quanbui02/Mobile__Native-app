@@ -75,9 +75,6 @@ public class AddNoteActivity extends AppCompatActivity {
                         .load(imageUri)
 //                        .placeholder(R.drawable.img3)
                         .into(this.imageNote);
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setMessage("Them anh thanh cong");
-                alert.show();
             }
             catch (Exception ex){
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);

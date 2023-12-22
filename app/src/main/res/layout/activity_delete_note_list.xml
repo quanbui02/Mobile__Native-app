@@ -19,6 +19,7 @@
         android:layout_marginEnd="@dimen/marginRight_buttonBack_list_delete"
         android:backgroundTint="@color/back_button_color"
         android:textColor="@color/white"
+        android:textSize="@dimen/textSize_backButton_list_delete"
         android:text="Trở về"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,17 +41,18 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleNoteDelete"
-        android:layout_width="408dp"
-        android:layout_height="598dp"
+        android:minWidth="1288dp"
+        android:layout_height="1068dp"
         android:layout_below="@+id/headerNoteDeleteText"
         android:layout_marginTop="@dimen/marginTop_List_list_delete"
-        android:Width="1000dp"
+        android:layout_width="0dp"
         android:minHeight="1000dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
