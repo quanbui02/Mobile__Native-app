@@ -72,7 +72,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintWidth_percent="@dimen/widthPercent_input_list_folder"
         app:queryHint="Tim kiem thu muc"
         tools:ignore="MissingConstraints" />
 
@@ -82,11 +82,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recycleFolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-103dp"
-        android:layout_marginEnd="327dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
