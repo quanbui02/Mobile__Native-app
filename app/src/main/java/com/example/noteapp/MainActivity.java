@@ -155,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Folder f = (Folder) rs.getData().getSerializableExtra("folder");
                     this.listFolder.add(f);
+                    this.listFolderP=this.listFolder;
                     this.folderAdapter.notifyDataSetChanged();
                 }
             });
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Folder rmFolder = this.listFolder.get(target);
                         this.listFolder.remove(rmFolder);
+                        this.listFolderP=this.listFolder;
                         this.folderAdapter.notifyItemRemoved(target);
                     } else {
                         this.listFolder.set(this.pos, fAE);
@@ -192,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 if(rs != null && rs.getResultCode() == RESULT_OK){
                     Folder fRestore = (Folder) rs.getData().getSerializableExtra("fRestore");
                     listFolder.add(fRestore);
+                    this.listFolderP=listFolder;
                     folderAdapter.notifyDataSetChanged();
                 }
             });

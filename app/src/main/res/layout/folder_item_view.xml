@@ -6,14 +6,14 @@
     android:clickable="true"
     android:focusable="true"
     android:orientation="horizontal"
-    android:paddingLeft="16dp"
-    android:paddingTop="20dp"
-    android:paddingRight="16dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginBottom="12dp"
+    android:paddingLeft="@dimen/paddingLeft_item_folder_item"
+    android:paddingTop="@dimen/paddingTop_item_folder_item"
+    android:paddingRight="@dimen/paddingRight_item_folder_item"
+    android:layout_marginLeft="@dimen/marginLeft_item_folder_item"
+    android:layout_marginRight="@dimen/marginRight_item_folder_item"
+    android:layout_marginBottom="@dimen/marginBottom_item_folder_item"
     android:background="@drawable/item_note"
-    android:paddingBottom="20dp">
+    android:paddingBottom="@dimen/paddingBottom_item_folder_item">
 
     <TextView
         android:id="@+id/nameFolder"
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Folder1"
-        android:textSize="16dp"
+        android:textSize="@dimen/textSize_text_folder_item"
         android:textColor="@color/white"
         android:textStyle="bold" />
 

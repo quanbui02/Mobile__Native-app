@@ -7,8 +7,9 @@
     <dimen name="marginRight_ButtonBack_add_folder">76dp</dimen>
     <dimen name="marginTop_ButtonBack_add_folder">196dp</dimen>
     <dimen name="textSize_ButtonBack_add_folder">196dp</dimen>
-    <dimen name="width_headerText_add_folder">580dp</dimen>
+    <dimen name="width_headerText_add_folder">300dp</dimen>
     <dimen name="height_headerText_add_folder">100dp</dimen>
+    <dimen name="textSize_headerText_add_folder">30sp</dimen>
     <dimen name="height_input_add_folder">40dp</dimen>
 
     <!--    add note-->
@@ -16,6 +17,7 @@
     <dimen name="marginLeft_ButtonAdd_add_note">32dp</dimen>
     <dimen name="marginTop_ButtonBack_add_note">32dp</dimen>
     <dimen name="marginRight_ButtonBack_add_note">32dp</dimen>
+    <dimen name="marginTop_ButtonDelete_add_note">272dp</dimen>
     <dimen name="height_inputTitle_add_note">42dp</dimen>
     <dimen name="marginTop_inputTitle_add_note">136dp</dimen>
     <dimen name="marginTop_inputContent_add_note">36dp</dimen>
@@ -25,6 +27,13 @@
     <dimen name="width_iconButton_add_note">42dp</dimen>
     <dimen name="height_iconButton_add_note">42dp</dimen>
     <dimen name="marginTop_iconButton_add_note">32dp</dimen>
+    <dimen name="paddingLeft_inputTitle_add_note">20dp</dimen>
+    <dimen name="paddingLeft_inputContent_add_note">20dp</dimen>
+    <dimen name="width_buttonBack_add_note">120dp</dimen>
+    <dimen name="height_buttonBack_add_note">60dp</dimen>
+    <dimen name="width_buttonDone_add_note">120dp</dimen>
+    <dimen name="height_buttonDone_add_note">60dp</dimen>
+    <dimen name="textSize_button_add_note">12dp</dimen>
 
     <!--    list_delete-->
     <dimen name="marginLeft_textHeader_list_delete">32dp</dimen>
@@ -45,25 +54,54 @@
     <dimen name="height_input_list_folder">50dp</dimen>
     <dimen name="marginTop_input_list_folder">80dp</dimen>
     <dimen name="marginBottom_button_add_list_folder">32dp</dimen>
+    <dimen name="marginRight_button_add_list_folder">40dp</dimen>
+    <dimen name="widthPercent_input_list_folder">0.9</dimen>
+    <dimen name="marginBottom_button_remove_list_folder">32dp</dimen>
+    <dimen name="marginLeft_button_remove_list_folder">40dp</dimen>
+    <dimen name="textSize_backButton_list_delete">20dp</dimen>
 
     <!--    note_list-->
     <dimen name="marginLeft_textHeader_note_list">28dp</dimen>
     <dimen name="marginTop_textHeader_note_list">16dp</dimen>
     <dimen name="textSize_textHeader_note_list">30dp</dimen>
-
     <dimen name="marginRight_ButtonBack_note_list">28dp</dimen>
     <dimen name="marginTop_ButtonBack_note_list">16dp</dimen>
     <dimen name="textSize_ButtonBack_note_list">30dp</dimen>
-
     <dimen name="marginTop_inputSearch_note_list">104dp</dimen>
-
     <dimen name="marginLeft_buttonAdd_note_list">44dp</dimen>
     <dimen name="marginBottom_buttonAdd_note_list">82dp</dimen>
-
     <dimen name="marginRight_buttonDelete_note_list">44dp</dimen>
     <dimen name="marginBottom_buttonDelete_note_list">82dp</dimen>
+    <dimen name="width_ButtonBack_note_list">100dp</dimen>
+    <dimen name="widthPercent_searchInput_note_list">0.9</dimen>
 
     <!--    note item-->
     <dimen name="textSize_note_note_item">20dp</dimen>
+    <dimen name="marginTop_note_note_item">3dp</dimen>
+    <dimen name="marginLeft_note_note_item">10dp</dimen>
     <dimen name="textSize_date_note_note_item">16dp</dimen>
+    <dimen name="marginTop_date_note_note_item">8dp</dimen>
+    <dimen name="marginLeft_date_note_note_item">11dp</dimen>
+    <dimen name="marginRight_date_note_note_item">174dp</dimen>
+    <dimen name="width_image_note_item">85dp</dimen>
+    <dimen name="height_image_note_item">85dp</dimen>
+    <dimen name="marginTop_image_note_item">10dp</dimen>
+    <dimen name="marginRight_image_note_item">32dp</dimen>
+
+    <!--    delete folder-->
+    <dimen name="marginTop_textHeader_delete_folder">30dp</dimen>
+    <dimen name="marginLeft_textHeader_delete_folder">15dp</dimen>
+    <dimen name="marginTop_buttonBack_delete_folder">30dp</dimen>
+    <dimen name="marginRight_buttonBack_delete_folder">15dp</dimen>
+    <dimen name="marginTop_list_delete_folder">164dp</dimen>
+
+    <!--    folder item-->
+    <dimen name="textSize_text_folder_item">16dp</dimen>
+    <dimen name="marginLeft_item_folder_item">12dp</dimen>
+    <dimen name="marginRight_item_folder_item">12dp</dimen>
+    <dimen name="marginBottom_item_folder_item">12dp</dimen>
+    <dimen name="paddingLeft_item_folder_item">16dp</dimen>
+    <dimen name="paddingRight_item_folder_item">16dp</dimen>
+    <dimen name="paddingTop_item_folder_item">20dp</dimen>
+    <dimen name="paddingBottom_item_folder_item">20dp</dimen>
 </resources>

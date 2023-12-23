@@ -22,33 +22,33 @@
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginStart="@dimen/marginLeft_note_note_item"
+        android:layout_marginTop="@dimen/marginTop_note_note_item"
         android:textColor="@color/white"
         android:text="TextView"
         android:textSize="@dimen/textSize_note_note_item" />
 
     <TextView
         android:id="@+id/dateNoteText"
-        android:layout_width="242dp"
+        android:layout_width="186dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titleNoteText"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="159dp"
+        android:layout_marginStart="@dimen/marginLeft_date_note_note_item"
+        android:layout_marginTop="@dimen/marginTop_date_note_note_item"
+        android:layout_marginEnd="@dimen/marginRight_date_note_note_item"
+        android:text="TextView"
         android:textColor="@color/white"
-        android:textSize="@dimen/textSize_date_note_note_item"
-        android:text="TextView" />
+        android:textSize="@dimen/textSize_date_note_note_item" />
 
     <ImageView
         android:id="@+id/imageViewNote"
-        android:layout_width="85dp"
-        android:layout_height="75dp"
+        android:layout_width="@dimen/width_image_note_item"
+        android:layout_height="@dimen/height_image_note_item"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="@dimen/marginTop_image_note_item"
+        android:layout_marginEnd="@dimen/marginRight_image_note_item"
         tools:srcCompat="@tools:sample/avatars" />
 </RelativeLayout>

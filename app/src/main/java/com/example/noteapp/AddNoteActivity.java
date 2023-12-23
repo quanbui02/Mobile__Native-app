@@ -73,11 +73,8 @@ public class AddNoteActivity extends AppCompatActivity {
                 Uri imageUri = Uri.parse(img);
                 Glide.with(this.imageNote)
                         .load(imageUri)
+//                        .placeholder(R.drawable.img3)
                         .into(this.imageNote);
-//                this.imageNote.setImageURI(Uri.parse(this.nE.getImagePath()));
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setMessage(this.nE.getImagePath());
-                alert.show();
             }
             catch (Exception ex){
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -166,7 +163,7 @@ public class AddNoteActivity extends AppCompatActivity {
                     imageNote.setImageURI(o);
                     imagePath = o.toString();
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddNoteActivity.this);
-                    alert.setMessage(imagePath);
+                    alert.setMessage("Thêm thành công");
                     alert.show();
                     check = "true";
                 }

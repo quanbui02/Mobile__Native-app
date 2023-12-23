@@ -11,7 +11,7 @@
 
     <Button
         android:id="@+id/backNoteDeleteBtn"
-        android:layout_width="99dp"
+        android:layout_width="@dimen/width_ButtonBack_note_list"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -56,7 +56,7 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchNoteDeleteText"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintWidth_percent="@dimen/widthPercent_searchInput_note_list"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headerNoteDeleteText"
         android:layout_alignParentStart="true"

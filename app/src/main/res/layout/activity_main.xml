@@ -12,18 +12,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleFolder"
-        android:layout_width="0dp"
-        android:layout_height="576dp"
+        android:layout_width="408dp"
+        android:layout_height="549dp"
         android:layout_below="@+id/searchText"
         android:layout_alignParentBottom="true"
-        android:minWidth="1000dp"
-        android:minHeight="1000dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.648"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -43,11 +41,12 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFolderButton"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/marginBottom_button_add_list_folder"
+        android:layout_marginEnd="@dimen/marginRight_button_add_list_folder"
         android:background="@drawable/primary_color_button"
         android:clickable="true"
         app:backgroundTint="@color/primary_color"
@@ -55,8 +54,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchText"
@@ -72,7 +71,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintWidth_percent="@dimen/widthPercent_input_list_folder"
         app:queryHint="Tim kiem thu muc"
         tools:ignore="MissingConstraints" />
 
@@ -82,11 +81,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recycleFolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-103dp"
-        android:layout_marginEnd="327dp"
+        android:layout_marginStart="@dimen/marginLeft_button_remove_list_folder"
+        android:layout_marginBottom="@dimen/marginBottom_button_remove_list_folder"
         android:clickable="true"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

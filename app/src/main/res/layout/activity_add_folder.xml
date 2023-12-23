@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/marginTop_headerText_add_folder"
         android:fontFamily="sans-serif-black"
         android:text="Flag 1-Add,2-edit"
-        android:textSize="60sp"
+        android:textSize="@dimen/textSize_headerText_add_folder"
         app:layout_constraintBottom_toTopOf="@+id/editNameFolder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editFolderBtn"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="156dp"
-        android:text="Xoa" />
+        android:layout_marginTop="@dimen/marginTop_ButtonDelete_add_note"
+        android:text="Xoa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
