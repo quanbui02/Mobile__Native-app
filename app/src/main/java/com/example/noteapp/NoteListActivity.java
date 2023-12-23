@@ -2,32 +2,27 @@ package com.example.noteapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.noteapp.Adapter.NoteAdapter;
-import com.example.noteapp.Database.DatabaseForApp;
-import com.example.noteapp.Model.Folder;
-import com.example.noteapp.Model.Note;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.noteapp.Adapter.NoteAdapter;
+import com.example.noteapp.Database.DatabaseForApp;
+import com.example.noteapp.Model.Note;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -46,7 +41,7 @@ public class NoteListActivity extends AppCompatActivity {
     private ArrayList<Note> listNoteP;
     private int idFolder;
     private int pos;
-    private RelativeLayout main_content;
+    private ConstraintLayout main_content;
     private DatabaseForApp db;
 
     @Override
@@ -116,6 +111,7 @@ public class NoteListActivity extends AppCompatActivity {
                     note.setStatusN("not active");
                     db.updateNote(note);
                     listNote.remove(pos);
+                    listNoteP=listNote;
                     noteAdapter.notifyItemRemoved(pos);
                 });
                 mySnackbar.show();
@@ -184,6 +180,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("new_note");
                     this.listNote.add(n);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });
@@ -191,6 +188,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note nAE = (Note) rs.getData().getSerializableExtra("noteAE");
                     this.listNote.set(this.pos, nAE);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyItemChanged(this.pos);
                 }
             });
@@ -198,6 +196,7 @@ public class NoteListActivity extends AppCompatActivity {
                 if (rs != null && rs.getResultCode() == RESULT_OK) {
                     Note n = (Note) rs.getData().getSerializableExtra("noteRestoreToNoteList");
                     this.listNote.add(n);
+                    this.listNoteP=this.listNote;
                     this.noteAdapter.notifyDataSetChanged();
                 }
             });

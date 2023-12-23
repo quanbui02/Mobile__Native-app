@@ -1,77 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/f_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".MainActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleFolder"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_width="408dp"
+        android:layout_height="549dp"
         android:layout_below="@+id/searchText"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="55dp"
-        android:layout_marginBottom="147dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.648"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/TextFolder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_Text_list_folder"
+        android:layout_height="@dimen/height_Text_list_folder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-
-        android:layout_marginStart="147dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="144dp"
+        android:layout_marginStart="@dimen/marginLeft_Text_list_folder"
+        android:layout_marginTop="@dimen/marginTop_Text_list_folder"
         android:fontFamily="sans-serif-black"
         android:text="Thư mục"
-        android:textSize="30dp" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/size_Text_list_folder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFolderButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="323dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="@dimen/marginBottom_button_add_list_folder"
+        android:layout_marginEnd="@dimen/marginRight_button_add_list_folder"
+        android:background="@drawable/primary_color_button"
         android:clickable="true"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/searchText"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentStart="true"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_marginStart="71dp"-->
-    <!--        android:layout_marginTop="82dp"-->
-    <!--        android:layout_marginEnd="57dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:inputType="text"-->
-    <!--        android:hint="Tìm kiếm thư mục" />-->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_input_list_folder"
         android:layout_below="@+id/TextFolder"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginTop="@dimen/marginTop_input_list_folder"
         android:background="@drawable/search_bg"
         app:iconifiedByDefault="false"
-        app:queryHint="Tim kiem thu muc" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="@dimen/widthPercent_input_list_folder"
+        app:queryHint="Tim kiem thu muc"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/garbageFolderBtn"
@@ -79,11 +81,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/recycleFolder"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="-103dp"
-        android:layout_marginEnd="327dp"
+        android:layout_marginStart="@dimen/marginLeft_button_remove_list_folder"
+        android:layout_marginBottom="@dimen/marginBottom_button_remove_list_folder"
         android:clickable="true"
-        tools:ignore="SpeakableTextPresentCheck"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        app:backgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

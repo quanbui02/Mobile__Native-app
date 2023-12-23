@@ -1,14 +1,13 @@
 package com.example.noteapp;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import com.bumptech.glide.Glide;
-import com.example.noteapp.Database.DatabaseForApp;
-import com.example.noteapp.Model.Note;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -16,21 +15,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.noteapp.databinding.ActivityAddNoteBinding;
+import com.bumptech.glide.Glide;
+import com.example.noteapp.Database.DatabaseForApp;
+import com.example.noteapp.Model.Note;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -86,11 +73,8 @@ public class AddNoteActivity extends AppCompatActivity {
                 Uri imageUri = Uri.parse(img);
                 Glide.with(this.imageNote)
                         .load(imageUri)
+//                        .placeholder(R.drawable.img3)
                         .into(this.imageNote);
-//                this.imageNote.setImageURI(Uri.parse(this.nE.getImagePath()));
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                alert.setMessage(this.nE.getImagePath());
-                alert.show();
             }
             catch (Exception ex){
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -179,7 +163,7 @@ public class AddNoteActivity extends AppCompatActivity {
                     imageNote.setImageURI(o);
                     imagePath = o.toString();
                     AlertDialog.Builder alert = new AlertDialog.Builder(AddNoteActivity.this);
-                    alert.setMessage(imagePath);
+                    alert.setMessage("Thêm thành công");
                     alert.show();
                     check = "true";
                 }

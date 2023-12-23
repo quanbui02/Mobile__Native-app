@@ -1,76 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@android:color/black"
     tools:context=".AddFolderActivity">
 
     <Button
         android:id="@+id/backNoteListBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_buttonBack_add_note"
+        android:layout_height="@dimen/height_buttonBack_add_note"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="299dp"
-        android:text="Trở về" />
+        android:layout_marginTop="@dimen/marginTop_ButtonBack_add_note"
+        android:layout_marginEnd="@dimen/marginRight_ButtonBack_add_note"
+        android:backgroundTint="@color/back_button_color"
+        android:text="Trở về"
+        android:textSize="@dimen/textSize_button_add_note"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/editNoteBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/width_buttonDone_add_note"
+        android:layout_height="@dimen/height_buttonDone_add_note"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="33dp"
-        android:layout_marginEnd="25dp"
-        android:text="Xong" />
+        android:layout_marginStart="@dimen/marginLeft_ButtonAdd_add_note"
+        android:layout_marginTop="@dimen/marginTop_ButtonAdd_add_note"
+        android:backgroundTint="@color/primary_color"
+        android:text="Xong"
+        android:textSize="@dimen/textSize_button_add_note"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/noteTitleText"
-        android:layout_width="359dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height_inputTitle_add_note"
         android:layout_below="@+id/backNoteListBtn"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="@dimen/marginTop_inputTitle_add_note"
+        android:background="@drawable/search_bg"
         android:ems="10"
-        android:inputType="text"
         android:hint="Tiêu đề..."
-        />
+        android:inputType="text"
+        android:paddingLeft="@dimen/paddingLeft_inputTitle_add_note"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/noteContentText"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/noteTitleText"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="@dimen/marginTop_inputContent_add_note"
+        android:background="@drawable/search_bg"
         android:ems="10"
         android:hint="Nhập ghi chú tại đây..."
         android:inputType="textMultiLine"
-        android:minHeight="150dp" />
+        android:minHeight="150dp"
+        android:paddingLeft="@dimen/paddingLeft_inputContent_add_note"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteTitleText"
+        app:layout_constraintWidth_percent="0.9" />
 
     <ImageView
         android:id="@+id/imageNoteView"
-        android:layout_width="355dp"
-        android:layout_height="292dp"
+        android:layout_width="@dimen/width_imageView_add_note"
+        android:layout_height="@dimen/height_imageView_add_note"
         android:layout_below="@+id/noteContentText"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="@dimen/marginTop_imageView_add_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noteContentText"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <ImageButton
         android:id="@+id/addImageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="39dp"
+        android:layout_width="@dimen/width_iconButton_add_note"
+        android:layout_height="@dimen/height_iconButton_add_note"
         android:layout_below="@+id/imageNoteView"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="185dp"
+        android:layout_marginTop="@dimen/marginTop_iconButton_add_note"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageNoteView"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
